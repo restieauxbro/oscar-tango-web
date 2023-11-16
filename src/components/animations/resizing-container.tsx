@@ -1,18 +1,18 @@
-import { motion } from "framer-motion"
-import { useMeasure } from "react-use"
+import { motion } from "framer-motion";
+import { useMeasure } from "react-use";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 function ResizingContainer({
   children,
   transition,
   className,
 }: {
-  children: React.ReactNode
-  transition?: object
-  className?: string
+  children: React.ReactNode;
+  transition?: object;
+  className?: string;
 }) {
-  const [ref, { width, height }] = useMeasure()
+  const [ref, { width, height }] = useMeasure();
 
   return (
     <motion.div
@@ -20,9 +20,14 @@ function ResizingContainer({
       className={cn("", className)}
       {...(transition && { transition })}
     >
-      <div ref={ref}>{children}</div>
+      <div
+        //@ts-ignore
+        ref={ref}
+      >
+        {children}
+      </div>
     </motion.div>
-  )
+  );
 }
 
-export default ResizingContainer
+export default ResizingContainer;
