@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import Header from "@/components/website-ui/header";
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={urbanist.className}>
         <Header />
         {children}
+        <Analytics />
       </body>
     </html>
   );
