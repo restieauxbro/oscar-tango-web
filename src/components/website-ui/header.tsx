@@ -1,30 +1,40 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../ui/button";
 import { Menu, Search } from "lucide-react";
 import { Input } from "../ui/input";
-import AnimateFromHidden from "../animations/AnimateFromHidden";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useKeyPress } from "@/utils/hooks";
+import Link from "next/link";
 
 const Header = () => {
   const [mode, setMode] = React.useState<"search" | "menu">("menu");
+  const keyPressed = useKeyPress("Escape");
+  useEffect(() => {
+    if (keyPressed["Escape"]) {
+      setMode("menu");
+    }
+  }, [keyPressed]);
+
   return (
-    <header className="fixed w-full px-4 pt-4">
+    <header className="fixed z-10 w-full px-4 py-8">
       <div className="flex justify-between">
-        <div className="font-medium">Oscar Tango</div>
+        <Link href={"/"} className="font-medium">
+          Oscar Tango
+        </Link>
         <div></div>
-        <div className="absolute left-0 hidden w-full place-items-center md:grid">
+        <div className="absolute left-1/2 top-0 hidden -translate-x-1/2 pt-4 md:block">
           <nav className="relative rounded-full bg-zinc-800 px-6 py-3 pl-8 text-white shadow-md">
             <ul className="flex items-center gap-8">
               <li>
-                <a href="#">Case studies</a>
+                <Link href="/case-studies">Case studies</Link>
               </li>
               <li>
-                <a href="#">About</a>
+                <Link href="/about">About</Link>
               </li>
               <li>
-                <a href="#">Contact</a>
+                <Link href="/contact">Contact</Link>
               </li>
               <div
                 className={cn(
@@ -41,9 +51,10 @@ const Header = () => {
                       className="w-full"
                     >
                       <Input
-                        className="w-full rounded-full bg-zinc-800 text-white focus:bg-zinc-800"
+                        className="w-full rounded-full border-none bg-zinc-800 text-white focus:bg-zinc-800"
                         type="text"
                         autoFocus
+                        placeholder=" Search or ask a question"
                       />
                     </motion.div>
                   )}
@@ -53,7 +64,7 @@ const Header = () => {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="hover:bg-zinc-700"
+                  className=" hover:bg-zinc-800"
                   onClick={() => setMode(mode === "menu" ? "search" : "menu")}
                 >
                   <Search size={20} />
