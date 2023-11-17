@@ -3,6 +3,8 @@ import { Urbanist } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import Header from "@/components/website-ui/header";
+import { cookies } from "next/headers";
+import PasswordPromptDialog from "@/components/auth/password-prompt-dialog";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -16,11 +18,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cookiesStore = cookies();
+  const loginCookies = cookiesStore.get(process.env.PASSWORD_COOKIE_NAME!);
+  const isLoggedIn = !!loginCookies?.value;
   return (
     <html lang="en">
       <body className={urbanist.className}>
-        <Header />
-        {children}
+        {isLoggedIn ? (
+          <>
+            <Header /> {children}
+          </>
+        ) : (
+          <PasswordPromptDialog />
+        )}
         <Analytics />
       </body>
     </html>
