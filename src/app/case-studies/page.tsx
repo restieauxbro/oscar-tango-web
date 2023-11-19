@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Client } from "@notionhq/client";
 
 // Initializing a client
@@ -9,6 +9,7 @@ const notion = new Client({
 const CaseStudiesPage = async () => {
   const OTDatabase = await notion.databases.query({
     database_id: "349dce2f4de34907add3f5a750c78cb1",
+    // filter_properties: ["title", "SjWT"],
   });
 
   const pages = OTDatabase.results.map((page) => {
@@ -23,19 +24,20 @@ const CaseStudiesPage = async () => {
     <div className="grid min-h-screen place-items-center">
       <div className="grid gap-8">
         <h1>Case Studies</h1>
-        {}
-        <ul>
+        {/* <ul>
           {pages.map(({ id, properties }) => (
             <li key={id}>
               {JSON.stringify(properties, null, 2)}
               <a href={`/case-studies/${id}`}>{id}</a>
             </li>
           ))}
-        </ul>
+        </ul> */}
         <br />
         <br />
         <br />
-        <pre>{JSON.stringify(OTDatabase, null, 2)}</pre>
+        <Suspense fallback={<div>Loading...</div>}>
+          <pre>{JSON.stringify(pages[1], null, 2)}</pre>
+        </Suspense>
       </div>
     </div>
   );
