@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/website-ui/header";
 import { cookies } from "next/headers";
 import PasswordPromptDialog from "@/components/auth/password-prompt-dialog";
+import GTag from "@/components/gtag";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={urbanist.className}>
+        <GTag />
         {isLoggedIn ? (
           <>
             <Header /> {children}

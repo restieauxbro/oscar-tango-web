@@ -9,44 +9,57 @@ import Balancer from "react-wrap-balancer";
 import { headingStyles } from "@/components/ui/typography";
 import AnimateFromHidden from "../animations/AnimateFromHidden";
 import { Button } from "../ui/button";
-import Image from 'next/image'
+import Image from "next/image";
 import {
   useScroll,
   useTransform,
   useSpring,
   motion,
   useMotionTemplate,
+  AnimatePresence,
 } from "framer-motion";
 
 const HeroChat = () => {
   const { messages, input, handleInputChange, handleSubmit, setInput } =
     useChat();
-    const springEase = {
-      stiffness: 200,
-      damping: 20,
-      restDelta: 0.001,
-    }
+  const springEase = {
+    stiffness: 200,
+    damping: 20,
+    restDelta: 0.001,
+  };
   const { scrollY } = useScroll();
-  const x = useTransform(scrollY, [100, 1000], [0, 10]);
   const scale = useTransform(scrollY, [100, 1000], [1, 0.9]);
-  const y = useTransform(scrollY, [100, 1000], [0, -80]);
-  const blur = useSpring(x, springEase);
+  const y = useTransform(scrollY, [100, 1100], [0, 200]);
+
+  const blurMotion = useTransform(scrollY, [100, 1000], [0, 10]);
+  const blur = useSpring(blurMotion, springEase);
   const blurMotionTemplate = useMotionTemplate`blur(${blur}px)`;
   return (
     <motion.div
-      className="grid w-full max-w-screen-lg p-8 relative"
-      style={{ filter: blurMotionTemplate, scale, y }}
+      className="relative grid w-full max-w-screen-lg p-8"
+      style={{ filter: blurMotionTemplate, scale }}
     >
-      <div className="absolute -top-24 -right-[20rem]">
-        <Image src="/images/phone-idea.webp" width={900} height={900} alt='big ideas' />
-
-      </div>
+      <AnimatePresence>
+        {!(messages.length > 0) && (
+          <motion.div
+            className="pointer-events-none absolute -right-[20rem] -top-24"
+            exit={{ opacity: 0, transition: { duration: 0.8 } }}
+          >
+            <Image
+              src="/images/phone-idea.webp"
+              width={900}
+              height={900}
+              alt="big ideas"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <AnimateFromHidden show={!!!messages.length} animateOnMount={false}>
         <div className="mb-24 max-w-xl lg:max-w-3xl">
           <h1
             className={cn(
               headingStyles,
-              "mb-8 text-cyan-900 text-5xl sm:text-6xl md:text-7xl lg:text-8xl",
+              "mb-8 text-5xl text-cyan-900 sm:text-6xl md:text-7xl lg:text-8xl",
             )}
           >
             Act today,
@@ -80,13 +93,13 @@ const HeroChat = () => {
             ].map((suggestion, i) => (
               <Button
                 key={i}
-                className="h-auto rounded-lg border bg-zinc-100/50 backdrop-blur-md px-6 py-6 text-left text-base text-zinc-800 shadow-md hover:bg-zinc-50/70"
+                className="h-auto rounded-lg border bg-zinc-100/50 px-6 py-6 text-left text-base text-zinc-800 shadow-md backdrop-blur-md hover:bg-zinc-50/70"
                 onClick={() => {
                   setInput(suggestion.description);
                 }}
               >
                 <div>
-                  <h2 className="font-medium">{suggestion.title}</h2>
+                  <h2 className="mb-2 font-semibold">{suggestion.title}</h2>
                   <p className="font-normal">{suggestion.description}</p>
                 </div>
               </Button>
