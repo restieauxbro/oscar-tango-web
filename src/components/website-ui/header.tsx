@@ -18,18 +18,15 @@ const Header = () => {
   }, [keyPressed]);
 
   return (
-    <header className="fixed z-10 w-full px-4 py-8">
+    <header className="fixed z-10 w-full px-4 py-4">
       <div className="flex justify-between">
         <Link href={"/"} className="font-medium">
-          Oscar Tango
+          <div className="h-16 w-16 bg-cyan-600 text-white leading-3 p-2 text-sm">Oscar <br /> Tango</div>
         </Link>
         <div></div>
         <div className="absolute left-1/2 top-0 hidden -translate-x-1/2 pt-4 md:block">
           <nav className="relative rounded-full bg-zinc-800 px-6 py-3 pl-8 text-white shadow-md">
             <ul className="flex items-center gap-8">
-              <li>
-                <Link href="/case-studies">Case studies</Link>
-              </li>
               <li>
                 <Link href="/about">About</Link>
               </li>
@@ -54,7 +51,7 @@ const Header = () => {
                         className="w-full rounded-full border-none bg-zinc-800 text-white focus:bg-zinc-800"
                         type="text"
                         autoFocus
-                        placeholder=" Search or ask a question"
+                        placeholder=" Search"
                       />
                     </motion.div>
                   )}

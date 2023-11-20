@@ -9,26 +9,56 @@ import Balancer from "react-wrap-balancer";
 import { headingStyles } from "@/components/ui/typography";
 import AnimateFromHidden from "../animations/AnimateFromHidden";
 import { Button } from "../ui/button";
+import Image from 'next/image'
+import {
+  useScroll,
+  useTransform,
+  useSpring,
+  motion,
+  useMotionTemplate,
+} from "framer-motion";
 
 const HeroChat = () => {
   const { messages, input, handleInputChange, handleSubmit, setInput } =
     useChat();
-  const [chatOpen, setChatOpen] = React.useState(false);
+    const springEase = {
+      stiffness: 200,
+      damping: 20,
+      restDelta: 0.001,
+    }
+  const { scrollY } = useScroll();
+  const x = useTransform(scrollY, [100, 1000], [0, 10]);
+  const scale = useTransform(scrollY, [100, 1000], [1, 0.9]);
+  const y = useTransform(scrollY, [100, 1000], [0, -80]);
+  const blur = useSpring(x, springEase);
+  const blurMotionTemplate = useMotionTemplate`blur(${blur}px)`;
   return (
-    <div className="grid w-full max-w-screen-lg p-8">
+    <motion.div
+      className="grid w-full max-w-screen-lg p-8 relative"
+      style={{ filter: blurMotionTemplate, scale, y }}
+    >
+      <div className="absolute -top-24 -right-[20rem]">
+        <Image src="/images/phone-idea.webp" width={900} height={900} alt='big ideas' />
+
+      </div>
       <AnimateFromHidden show={!!!messages.length} animateOnMount={false}>
         <div className="mb-24 max-w-xl lg:max-w-3xl">
-          <h1 className={cn(headingStyles, "mb-8 md:text-5xl lg:text-7xl")}>
-            <Balancer>A heading about bringing AI to industry</Balancer>
+          <h1
+            className={cn(
+              headingStyles,
+              "mb-8 text-cyan-900 md:text-5xl lg:text-8xl",
+            )}
+          >
+            Act today,
+            <br />
+            Lead tomorrow
           </h1>
-          <p className="max-w-lg text-lg lg:text-xl">
-            We develop smart digital solutions for businesses looking forward.
-            We’re a lean team who has cut the crap and trimmed the fat of agency
-            work yada yada yada AI
+          <p className="max-w-md text-xl lg:text-2xl">
+            <Balancer>Drive your digital engagement with AI</Balancer>
           </p>
         </div>
       </AnimateFromHidden>
-      <div>
+      <div className="max-w-screen-lg">
         <AnimateFromHidden show={!!!messages.length} animateOnMount={false}>
           <p className={cn(captionStyles, "mb-4 text-base")}>
             Start your pre-consultation
@@ -50,7 +80,7 @@ const HeroChat = () => {
             ].map((suggestion, i) => (
               <Button
                 key={i}
-                className="h-auto rounded-lg border bg-zinc-100 px-6 py-6 text-left text-base text-zinc-800 shadow-md hover:bg-zinc-100"
+                className="h-auto rounded-lg border bg-zinc-100/50 backdrop-blur-md px-6 py-6 text-left text-base text-zinc-800 shadow-md hover:bg-zinc-50/70"
                 onClick={() => {
                   setInput(suggestion.description);
                 }}
@@ -80,7 +110,7 @@ const HeroChat = () => {
           </form>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
