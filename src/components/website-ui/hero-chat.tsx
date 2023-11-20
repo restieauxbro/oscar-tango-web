@@ -42,13 +42,13 @@ const HeroChat = () => {
       <AnimatePresence>
         {!(messages.length > 0) && (
           <motion.div
-            className="pointer-events-none absolute -right-[20rem] -top-24"
+            className="pointer-events-none absolute hidden md:block -right-52 lg:right-[-20rem] -top-24"
             exit={{ opacity: 0, transition: { duration: 0.8 } }}
           >
             <Image
-              src="/images/phone-idea.webp"
-              width={900}
-              height={900}
+              src="/images/isometric-phone-1.png"
+              width={850}
+              height={850}
               alt="big ideas"
             />
           </motion.div>
