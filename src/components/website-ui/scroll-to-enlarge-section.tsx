@@ -30,16 +30,18 @@ const ScrollToEnlarge = () => {
         <ChevronDown />
       </div>
       <section ref={ref} className="text-white">
-        <div className="grid min-h-screen max-w-screen-xl place-content-center px-8 py-12 sm:px-6 sm:py-12 lg:px-12 lg:py-20">
-          <div className="max-w-3xl">
-            <h2 className="text-3xl font-medium sm:text-4xl lg:text-7xl">
-              {`We are a lean digital agency that doesn't settle for conventional`}
-            </h2>
-          </div>
-          <div className="ml-auto mr-0 mt-20 max-w-2xl">
-            <h2 className="text-3xl font-medium sm:text-4xl lg:text-5xl">
-              {`What makes us different?`}
-            </h2>
+        <div className="grid min-h-screen place-content-center py-12 sm:py-12  lg:py-20">
+          <div className="px-8  sm:px-6 lg:px-12">
+            <div className="max-w-3xl">
+              <h2 className="text-4xl font-medium sm:text-6xl lg:text-7xl">
+                {`We are a lean digital agency that doesn't settle for conventional`}
+              </h2>
+            </div>
+            <div className="ml-auto mr-0 mt-20 max-w-2xl">
+              <h2 className="text-right text-3xl font-medium sm:text-4xl lg:text-5xl">
+                {`What makes us different?`}
+              </h2>
+            </div>
           </div>
 
           <div className="grid w-screen max-w-screen-lg grid-cols-3 gap-4 pt-12 lg:pt-20">

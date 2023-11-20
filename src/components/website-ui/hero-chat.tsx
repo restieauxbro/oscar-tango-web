@@ -46,7 +46,7 @@ const HeroChat = () => {
           <h1
             className={cn(
               headingStyles,
-              "mb-8 text-cyan-900 md:text-5xl lg:text-8xl",
+              "mb-8 text-cyan-900 text-5xl sm:text-6xl md:text-7xl lg:text-8xl",
             )}
           >
             Act today,

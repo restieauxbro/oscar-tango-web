@@ -7,7 +7,7 @@ import Balancer from "react-wrap-balancer";
 export default function Home() {
   return (
     <main>
-      <div>
+      <div className="overflow-x-hidden">
         <div className="sticky top-0 grid min-h-screen place-items-center py-12">
           <HeroChat />
         </div>
@@ -24,7 +24,7 @@ export default function Home() {
             className="absolute inset-0 h-full w-full object-cover opacity-70"
             style={{ objectFit: "cover" }}
           />
-          <div className="relative mx-auto max-w-screen-lg py-1 lg:py-24 text-white">
+          <div className="relative mx-auto max-w-screen-lg py-20 lg:py-28 text-white">
             <h2 className="text-3xl font-medium sm:text-4xl lg:text-7xl max-w-xl">
               <Balancer>{`Leading with AI, so you can too`} </Balancer>
             </h2>
