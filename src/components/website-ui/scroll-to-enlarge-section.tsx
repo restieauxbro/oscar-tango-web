@@ -23,7 +23,7 @@ const ScrollToEnlarge = () => {
 
   return (
     <motion.div
-      className="relative -mt-24 mb-0 flex justify-center overflow-hidden rounded-t-[2.5rem] bg-cyan-800"
+      className="relative -mt-24 mb-0 flex justify-center overflow-hidden rounded-t-[2.5rem] bg-cyan-800 preserve-3d"
       style={{ scale }}
     >
       <div className="absolute left-1/2 top-1 -translate-x-1/2 text-white">
