@@ -13,6 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { AnimatePresence, motion } from "framer-motion";
+import AnimateFromHidden from "../animations/AnimateFromHidden";
 
 const Form = FormProvider;
 
@@ -79,7 +80,7 @@ const FormItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div ref={ref} className={cn("", className)} {...props} />
     </FormItemContext.Provider>
   );
 });
@@ -94,7 +95,7 @@ const FormLabel = React.forwardRef<
   return (
     <Label
       ref={ref}
-      className={cn(error && "text-destructive", className)}
+      className={cn("mb-4", error && "text-destructive", className)}
       htmlFor={formItemId}
       {...props}
     />
@@ -111,34 +112,25 @@ const FormControl = React.forwardRef<
 
   return (
     <>
-      <AnimatePresence>
-        <Slot
-          ref={ref}
-          id={formItemId}
-          aria-describedby={
-            !error
-              ? `${formDescriptionId}`
-              : `${formDescriptionId} ${formMessageId}`
-          }
-          aria-invalid={!!error}
-          {...props}
-        />
-        {error && (
-          <motion.div
-            key={formDescriptionId}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-          >
-            <p
-              id={formDescriptionId}
-              className="text-xs font-medium text-destructive"
-            >
-              {error?.message}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Slot
+        ref={ref}
+        id={formItemId}
+        aria-describedby={
+          !error
+            ? `${formDescriptionId}`
+            : `${formDescriptionId} ${formMessageId}`
+        }
+        aria-invalid={!!error}
+        {...props}
+      />
+      <AnimateFromHidden show={!!error}>
+        <p
+          id={formDescriptionId}
+          className="pt-2 text-xs font-medium text-destructive"
+        >
+          {error?.message}
+        </p>
+      </AnimateFromHidden>
     </>
   );
 });
@@ -173,14 +165,14 @@ const FormMessage = React.forwardRef<
   }
 
   return (
-      <p
-        ref={ref}
-        id={formMessageId}
-        className={cn("text-sm font-medium text-destructive hidden", className)}
-        {...props}
-      >
-        {body}
-      </p>
+    <p
+      ref={ref}
+      id={formMessageId}
+      className={cn("hidden text-sm font-medium text-destructive", className)}
+      {...props}
+    >
+      {body}
+    </p>
   );
 });
 FormMessage.displayName = "FormMessage";
