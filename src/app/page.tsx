@@ -1,7 +1,6 @@
 import { ProfileForm } from "@/components/website-ui/contact-form";
 import HeroChat from "@/components/website-ui/hero-chat";
 import ScrollToEnlarge from "@/components/website-ui/scroll-to-enlarge-section";
-import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Balancer from "react-wrap-balancer";
 
@@ -26,7 +25,7 @@ export default function Home() {
             style={{ objectFit: "cover" }}
           />
           <div className="relative mx-auto max-w-screen-lg py-20 text-white lg:py-28">
-            <h2 className="max-w-xl text-3xl font-medium sm:text-4xl lg:text-7xl">
+            <h2 className="max-w-xl text-3xl font-medium sm:text-4xl md:text-6xl lg:text-7xl">
               <Balancer>{`Leading with AI, so you can too`} </Balancer>
             </h2>
             <div className="max-w-lg mr-0 ml-auto mt-12">
