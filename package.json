@@ -29,6 +29,8 @@
     "react-hook-form": "^7.48.2",
     "react-use": "^17.4.0",
     "react-wrap-balancer": "^1.1.0",
+    "sanitize-html": "^2.11.0",
+    "sass": "^1.69.5",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"
@@ -38,6 +40,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/sanitize-html": "^2.9.5",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.2",

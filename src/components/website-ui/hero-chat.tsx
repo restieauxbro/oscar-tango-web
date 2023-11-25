@@ -36,7 +36,7 @@ const HeroChat = () => {
   const blurMotionTemplate = useMotionTemplate`blur(${blur}px)`;
   return (
     <motion.div
-      className="relative grid w-full max-w-screen-lg p-8 lg:min-h-[667px]"
+      className="relative grid w-full max-w-screen-lg p-8 "
       style={{ filter: blurMotionTemplate, scale }}
     >
       <AnimatePresence>
@@ -55,28 +55,28 @@ const HeroChat = () => {
         )}
       </AnimatePresence>
       <AnimateFromHidden show={!!!messages.length} animateOnMount={false}>
-        <div className="mb-24 max-w-xl lg:max-w-3xl">
+        <div className="mb-12 max-w-xl lg:max-w-3xl">
           <h1
             className={cn(
               headingStyles,
-              "mb-8 text-5xl text-cyan-900 sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl",
+              "mb-8 text-5xl text-cyan-900 sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl",
             )}
           >
             Act today,
             <br />
             Lead tomorrow
           </h1>
-          <p className="max-w-md text-xl lg:text-2xl">
+          <p className="max-w-md lg:text-lg xl:text-xl text-slate-700">
             <Balancer>Drive your digital engagement with AI</Balancer>
           </p>
         </div>
       </AnimateFromHidden>
       <div className="max-w-screen-lg">
         <AnimateFromHidden show={!!!messages.length} animateOnMount={false}>
-          <p className={cn(captionStyles, "mb-4 text-base")}>
+          <p className={cn(captionStyles, "mb-4 text-base text-slate-500")}>
             Start your pre-consultation
           </p>
-          <div className="mb-8 grid grid-cols-3 gap-4">
+          <div className="mb-4 grid grid-cols-3 gap-4">
             {[
               {
                 title: "AI Safety",
@@ -93,7 +93,7 @@ const HeroChat = () => {
             ].map((suggestion, i) => (
               <Button
                 key={i}
-                className="h-full w-full rounded-lg border bg-slate-100/50 px-6 py-6 text-left text-base text-zinc-800 shadow-md backdrop-blur-md hover:bg-zinc-50/70"
+                className="h-full w-full rounded-lg border border-slate-300 bg-slate-100/50 px-6 py-6 text-left text-base text-zinc-800 shadow-md backdrop-blur-md hover:bg-slate-50/70"
                 onClick={() => {
                   setInput(suggestion.description);
                 }}
@@ -108,7 +108,7 @@ const HeroChat = () => {
         </AnimateFromHidden>
         <div>
           {messages.map((m) => (
-            <div key={m.id} className="mb-8">
+            <div key={m.id} className="mb-2">
               {m.role}: {m.content}
             </div>
           ))}

@@ -25,8 +25,8 @@ const Header = () => {
         </Link>
         <div></div>
         <div className="absolute left-1/2 top-0 hidden -translate-x-1/2 pt-4 md:block">
-          <nav className="relative rounded-full bg-zinc-800 px-6 py-3 pl-8 text-white shadow-md">
-            <ul className="flex items-center gap-8">
+          <nav className="relative rounded-full bg-slate-800 px-4 py-2 pl-6 text-white shadow-md">
+            <ul className="flex items-center gap-6 text-sm">
               <li>
                 <Link href="/about">About</Link>
               </li>
