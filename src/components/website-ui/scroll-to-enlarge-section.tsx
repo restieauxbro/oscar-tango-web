@@ -44,7 +44,7 @@ const ScrollToEnlarge = () => {
             </div>
           </div>
 
-          <div className="grid w-screen max-w-screen-lg grid-cols-3 gap-4 pt-12 lg:pt-20">
+          <div className="grid w-screen max-w-screen-lg md:grid-cols-3 gap-4 pt-12 lg:pt-20 px-8">
             {[
               {
                 title: "Personalized AI Strategies",

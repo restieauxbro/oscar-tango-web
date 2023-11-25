@@ -36,13 +36,13 @@ const HeroChat = () => {
   const blurMotionTemplate = useMotionTemplate`blur(${blur}px)`;
   return (
     <motion.div
-      className="relative grid w-full max-w-screen-lg p-8"
+      className="relative grid w-full max-w-screen-lg p-8 lg:min-h-[667px]"
       style={{ filter: blurMotionTemplate, scale }}
     >
       <AnimatePresence>
         {!(messages.length > 0) && (
           <motion.div
-            className="pointer-events-none absolute hidden md:block -right-52 lg:right-[-20rem] -top-24"
+            className="pointer-events-none absolute -right-52 -top-24 hidden md:block lg:right-[-20rem]"
             exit={{ opacity: 0, transition: { duration: 0.8 } }}
           >
             <Image
@@ -93,7 +93,7 @@ const HeroChat = () => {
             ].map((suggestion, i) => (
               <Button
                 key={i}
-                className="h-auto rounded-lg border bg-zinc-100/50 px-6 py-6 text-left text-base text-zinc-800 shadow-md backdrop-blur-md hover:bg-zinc-50/70"
+                className="h-full w-full rounded-lg border bg-slate-100/50 px-6 py-6 text-left text-base text-zinc-800 shadow-md backdrop-blur-md hover:bg-zinc-50/70"
                 onClick={() => {
                   setInput(suggestion.description);
                 }}
@@ -117,7 +117,7 @@ const HeroChat = () => {
             <Input
               value={input}
               className="w-full px-5 py-6 text-lg"
-              placeholder="Say something..."
+              placeholder="Tell us about your project and get some initial advice"
               onChange={handleInputChange}
             />
           </form>
