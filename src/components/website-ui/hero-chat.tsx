@@ -55,7 +55,7 @@ const HeroChat = () => {
         )}
       </AnimatePresence>
       <AnimateFromHidden show={!!!messages.length} animateOnMount={false}>
-        <div className="mb-12 max-w-xl lg:max-w-3xl">
+        <div className="mb-12 lg:mb-16 max-w-xl lg:max-w-3xl">
           <h1
             className={cn(
               headingStyles,
@@ -73,9 +73,9 @@ const HeroChat = () => {
       </AnimateFromHidden>
       <div className="max-w-screen-lg">
         <AnimateFromHidden show={!!!messages.length} animateOnMount={false}>
-          <p className={cn(captionStyles, "mb-4 text-base text-slate-500")}>
+          {/* <p className={cn(captionStyles, "mb-4 text-base text-slate-500")}>
             Start your pre-consultation
-          </p>
+          </p> */}
           <div className="mb-4 grid grid-cols-3 gap-4">
             {[
               {

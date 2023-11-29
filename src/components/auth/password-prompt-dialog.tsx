@@ -6,18 +6,20 @@ import { Button } from "../ui/button";
 import AnimateFromHidden from "../animations/AnimateFromHidden";
 import { headingStyles } from "../ui/typography";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
-const PasswordPromptDialog = () => {
+const PasswordPromptDialog = ({client}: {client: string}) => {
   const [password, setPassword] = useState("");
   const [passwordIncorrect, setPasswordIncorrect] = useState(false);
   const [loading, setLoading] = useState(false);
+  const pathName = usePathname();
 
   const handleSubmit = (e: any) => {
     const onSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       setLoading(true);
-      const request = await fetch(`/api`, {
-        body: JSON.stringify({ password }),
+      const request = await fetch(`/api/auth/`, {
+        body: JSON.stringify({ password, client }),
         headers: { "Content-Type": "application/json" },
         method: "post",
       });

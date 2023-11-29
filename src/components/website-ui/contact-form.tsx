@@ -98,7 +98,7 @@ export function ProfileForm() {
                   name="first_name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>First name</FormLabel>
+                      <FormLabel className='mb-2'>First name</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="John"
@@ -116,7 +116,7 @@ export function ProfileForm() {
                   name="last_name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Last name</FormLabel>
+                      <FormLabel className='mb-2'>Last name</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Doe"
@@ -135,7 +135,7 @@ export function ProfileForm() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className='mb-2'>Email</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="john@gmail.com"
@@ -153,7 +153,7 @@ export function ProfileForm() {
                 name="company_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Company</FormLabel>
+                    <FormLabel className='mb-2'>Company</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="John's Doughnuts"
@@ -171,7 +171,7 @@ export function ProfileForm() {
                 name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Message</FormLabel>
+                    <FormLabel className='mb-2'>Message</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Tell us about your project"
