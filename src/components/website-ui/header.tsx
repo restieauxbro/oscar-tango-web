@@ -21,7 +21,7 @@ const Header = () => {
     <header className="fixed z-10 w-full px-4 py-4">
       <div className="flex justify-between">
         <Link href={"/"} className="font-medium">
-          <div className="h-16 w-16 bg-cyan-600 text-white leading-3 p-2 text-sm">Oscar <br /> Tango</div>
+          <div className="h-16 w-16 bg-cyan-600 text-white leading-3 p-2 text-sm scale-75 origin-top-left">Oscar <br /> Tango</div>
         </Link>
         <div></div>
         <div className="absolute left-1/2 top-0 hidden -translate-x-1/2 pt-4 md:block">

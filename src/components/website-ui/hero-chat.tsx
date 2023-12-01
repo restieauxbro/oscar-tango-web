@@ -18,10 +18,9 @@ import {
   useMotionTemplate,
   AnimatePresence,
 } from "framer-motion";
+import ChatUI from "../ui/chat-ui";
 
 const HeroChat = () => {
-  const { messages, input, handleInputChange, handleSubmit, setInput } =
-    useChat();
   const springEase = {
     stiffness: 200,
     damping: 20,
@@ -40,7 +39,7 @@ const HeroChat = () => {
       style={{ filter: blurMotionTemplate, scale }}
     >
       <AnimatePresence>
-        {!(messages.length > 0) && (
+        {true && (
           <motion.div
             className="pointer-events-none absolute -right-52 -top-24 hidden md:block lg:right-[-20rem]"
             exit={{ opacity: 0, transition: { duration: 0.8 } }}
@@ -54,8 +53,8 @@ const HeroChat = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <AnimateFromHidden show={!!!messages.length} animateOnMount={false}>
-        <div className="mb-12 lg:mb-16 max-w-xl lg:max-w-3xl">
+      <AnimateFromHidden show={true} animateOnMount={false}>
+        <div className="mb-12 max-w-xl lg:mb-16 lg:max-w-3xl">
           <h1
             className={cn(
               headingStyles,
@@ -66,17 +65,17 @@ const HeroChat = () => {
             <br />
             Lead tomorrow
           </h1>
-          <p className="max-w-md lg:text-lg xl:text-xl text-slate-700">
+          <p className="max-w-md text-slate-700 lg:text-lg xl:text-xl">
             <Balancer>Drive your digital engagement with AI</Balancer>
           </p>
         </div>
       </AnimateFromHidden>
       <div className="max-w-screen-lg">
-        <AnimateFromHidden show={!!!messages.length} animateOnMount={false}>
+        <AnimateFromHidden show={true} animateOnMount={false}>
           {/* <p className={cn(captionStyles, "mb-4 text-base text-slate-500")}>
             Start your pre-consultation
           </p> */}
-          <div className="mb-4 grid grid-cols-3 gap-4">
+          <div className=" grid grid-cols-3 gap-4">
             {[
               {
                 title: "AI Safety",
@@ -95,7 +94,7 @@ const HeroChat = () => {
                 key={i}
                 className="h-full w-full rounded-lg border border-slate-300 bg-slate-100/50 px-6 py-6 text-left text-base text-zinc-800 shadow-md backdrop-blur-md hover:bg-slate-50/70"
                 onClick={() => {
-                  setInput(suggestion.description);
+                  console.log("clicked");
                 }}
               >
                 <div>
@@ -106,21 +105,8 @@ const HeroChat = () => {
             ))}
           </div>
         </AnimateFromHidden>
-        <div>
-          {messages.map((m) => (
-            <div key={m.id} className="mb-2">
-              {m.role}: {m.content}
-            </div>
-          ))}
-
-          <form onSubmit={handleSubmit}>
-            <Input
-              value={input}
-              className="w-full px-5 py-6 text-lg"
-              placeholder="Tell us about your project and get some initial advice"
-              onChange={handleInputChange}
-            />
-          </form>
+        <div className="max-w-screen-md">
+          <ChatUI />
         </div>
       </div>
     </motion.div>
