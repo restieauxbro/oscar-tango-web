@@ -28,15 +28,15 @@ const HeroChat = () => {
   };
   const section = useRef(null);
 
-  const { scrollYProgress } = useScroll({
+  const { scrollY } = useScroll({
     target: section,
     offset: ["start end", "end end"],
   });
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const y = useTransform(scrollYProgress, [100, 1100], [0, 200]);
+  const scale = useTransform(scrollY, [500, 1000], [1, 0.9]);
+  const y = useTransform(scrollY, [100, 1100], [0, 200]);
   console.log(section)
 
-  const blurMotion = useTransform(scrollYProgress, [200, 1000], [0, 10]);
+  const blurMotion = useTransform(scrollY, [200, 1000], [0, 10]);
   const blur = useSpring(blurMotion, springEase);
   const blurMotionTemplate = useMotionTemplate`blur(${blur}px)`;
   return (
@@ -77,46 +77,9 @@ const HeroChat = () => {
             </p>
           </div>
         </AnimateFromHidden>
-        <div className="max-w-screen-lg">
-          <AnimateFromHidden show={true} animateOnMount={false}>
-            {/* <p className={cn(captionStyles, "mb-4 text-base text-slate-500")}>
-            Start your pre-consultation
-          </p> */}
-            <div className=" grid grid-cols-3 gap-4">
-              {[
-                {
-                  title: "AI Safety",
-                  description:
-                    "What do I need to do to make sure my AI is safe?",
-                },
-                {
-                  title: "Suggestion 2",
-                  description: "This is a description of suggestion 2",
-                },
-                {
-                  title: "Suggestion 3",
-                  description: "This is a description of suggestion 3",
-                },
-              ].map((suggestion, i) => (
-                <Button
-                  key={i}
-                  className="h-full w-full rounded-lg border border-slate-300 bg-slate-100/50 px-6 py-6 text-left text-base text-zinc-800 shadow-md backdrop-blur-md hover:bg-slate-50/70"
-                  onClick={() => {
-                    console.log("clicked");
-                  }}
-                >
-                  <div>
-                    <h2 className="mb-2 font-semibold">{suggestion.title}</h2>
-                    <p className="font-normal">{suggestion.description}</p>
-                  </div>
-                </Button>
-              ))}
-            </div>
-          </AnimateFromHidden>
           <div className="max-w-screen-md">
             <ChatUI inputPlaceholder="Get some initial advice" />
           </div>
-        </div>
       <div ref={section} />
       </motion.div>
     </>
