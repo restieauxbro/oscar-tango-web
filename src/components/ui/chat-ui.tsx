@@ -29,7 +29,7 @@ type ClientChatMessage = {
   feedback?: string;
 };
 
-const ChatUI = () => {
+const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
   const [chatHistory, setChatHistory] = useState<ClientChatMessage[]>([
     {
       id: "0",
@@ -67,7 +67,12 @@ const ChatUI = () => {
             </div>
             <div className="mt-8">
               <ChatInput
-                {...{ chatHistory, setChatHistory, disabled: state === "busy" }}
+                {...{
+                  chatHistory,
+                  setChatHistory,
+                  disabled: state === "busy",
+                  inputPlaceholder,
+                }}
               />
             </div>
           </LayoutGroup>
@@ -279,10 +284,12 @@ const ChatInput = ({
   chatHistory,
   setChatHistory,
   disabled,
+  inputPlaceholder,
 }: {
   chatHistory: ClientChatMessage[];
   setChatHistory: Dispatch<SetStateAction<ClientChatMessage[]>>;
   disabled: boolean;
+  inputPlaceholder?: string;
 }) => {
   const [message, setMessage] = useState("");
 
@@ -329,13 +336,13 @@ const ChatInput = ({
         value={message}
         onKeyDown={(e: any) => handleKeyDown(e)}
         id="chat-input"
-        placeholder="Type your message"
+        placeholder={inputPlaceholder || "Type your message"}
         disabled={disabled}
         autoFocus
       />
 
       <Button
-        className={`absolute right-0 top-1/2 mr-2 h-8 w-8 p-0 -translate-y-1/2 overflow-hidden rounded-full text-white ${
+        className={`absolute right-0 top-1/2 mr-2 h-8 w-8 -translate-y-1/2 overflow-hidden rounded-full p-0 text-white ${
           message.length > 0 ? "bg-cyan-600" : "bg-slate-400"
         }`}
         //  style={{ marginBottom: "0.35rem" }}

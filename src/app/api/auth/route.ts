@@ -22,11 +22,16 @@ export async function POST(request: Request) {
   };
 
   if (!passwords[client as keyof typeof passwords]) {
-    return new Response("Incorrect password", {
+    return new Response("Not a client", {
       status: 404,
     });
   }
-
+  if (password !== passwords[client as keyof typeof passwords]) {
+    return new Response("password incorrect", {
+      status: 401,
+    });
+  }
+  console.log("password correct");
   return new Response("password correct", {
     status: 200,
     headers: {

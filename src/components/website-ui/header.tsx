@@ -21,12 +21,17 @@ const Header = () => {
     <header className="fixed z-10 w-full px-4 py-4">
       <div className="flex justify-between">
         <Link href={"/"} className="font-medium">
-          <div className="h-16 w-16 bg-cyan-600 text-white leading-3 p-2 text-sm scale-75 origin-top-left">Oscar <br /> Tango</div>
+          <div className="h-16 w-16 origin-top-left scale-75 bg-cyan-600 p-2 text-sm leading-3 text-white">
+            Oscar <br /> Tango
+          </div>
         </Link>
         <div></div>
         <div className="absolute left-1/2 top-0 hidden -translate-x-1/2 pt-4 md:block">
           <nav className="relative rounded-full bg-slate-800 px-4 py-2 pl-6 text-white shadow-md">
             <ul className="flex items-center gap-6 text-sm">
+              <li>
+                <Link href="/case-studies">Case Studies</Link>
+              </li>
               <li>
                 <Link href="/about">About</Link>
               </li>
@@ -35,7 +40,7 @@ const Header = () => {
               </li>
               <div
                 className={cn(
-                  "absolute right-0 flex w-full justify-end px-2",
+                  "absolute right-0 flex w-full justify-end px-1",
                   mode !== "search" && "pointer-events-none",
                 )}
               >

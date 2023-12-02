@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Button, LoadingButton } from "../ui/button";
 import AnimateFromHidden from "../animations/AnimateFromHidden";
 import { headingStyles } from "../ui/typography";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-const PasswordPromptDialog = ({client}: {client: string}) => {
+const PasswordPromptDialog = ({ client }: { client: string }) => {
   const [password, setPassword] = useState("");
   const [passwordIncorrect, setPasswordIncorrect] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -34,10 +34,11 @@ const PasswordPromptDialog = ({client}: {client: string}) => {
   return (
     <>
       <div className="grid min-h-screen place-items-center p-8">
-        <form onSubmit={handleSubmit} className="grid w-full max-w-sm gap-4">
-          <h1 className={cn(headingStyles, "mb-4 text-center")}>
-            Launching soon 👀
-          </h1>
+        <form
+          onSubmit={handleSubmit}
+          className="grid w-full max-w-sm gap-4 text-center"
+        >
+          <h1 className={cn(headingStyles, "mb-2")}>Halt, traveller 🔒</h1>
           <div>
             <label htmlFor="password" className="hidden">
               Password:
@@ -45,7 +46,8 @@ const PasswordPromptDialog = ({client}: {client: string}) => {
             <Input
               type="password"
               id="password"
-              placeholder="Password"
+              placeholder="What's the password?"
+              className="text-center"
               autoFocus
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -56,7 +58,9 @@ const PasswordPromptDialog = ({client}: {client: string}) => {
               </p>
             </AnimateFromHidden>
           </div>
-          <Button type="submit">Submit</Button>
+          <LoadingButton type="submit" {...{ loading, loaderFill: "white" }}>
+            Submit
+          </LoadingButton>
         </form>
       </div>
     </>

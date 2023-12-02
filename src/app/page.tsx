@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main>
       <div className="overflow-x-hidden">
-        <div className="sticky top-0 grid min-h-screen place-items-center py-12">
+        <div className="sticky top-0 grid min-h-screen place-items-center md:py-16">
           <HeroChat />
         </div>
 

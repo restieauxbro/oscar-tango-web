@@ -14,8 +14,6 @@ const AuthWall = ({
   const clientAuthCookie = cookiesStore.get(`${client}-logged-in`);
   const isLoggedIn = !!oscarTangoSuperLogin?.value || !!clientAuthCookie?.value;
 
-  // console.log({ oscarTangoSuperLogin, clientAuthCookie });
-
   if (isLoggedIn) return children;
   else return <PasswordPromptDialog {...{ client }} />;
 };
