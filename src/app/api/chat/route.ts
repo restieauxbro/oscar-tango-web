@@ -8,11 +8,13 @@ const openai = new OpenAI({
 export const runtime = "edge";
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages, functions, function_call } = await req.json();
   const response = await openai.chat.completions.create({
     model: "gpt-4",
     stream: true,
     messages,
+    functions,
+    function_call,
   });
   const stream = OpenAIStream(response);
   return new StreamingTextResponse(stream);

@@ -43,7 +43,7 @@ const HeroChat = () => {
     <>
       <motion.div
         className="relative grid w-full max-w-screen-lg p-8 "
-        style={{ filter: blurMotionTemplate, scale }}
+     //   style={{ filter: blurMotionTemplate, scale }}
       >
         <AnimatePresence>
           {true && (

@@ -55,19 +55,19 @@ const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
                       ? []
                       : [
                           {
+                            title: "Easiest wins",
+                            description:
+                              "What are the easiest wins in AI right now?",
+                          },
+                          {
                             title: "AI Safety",
                             description:
                               "What do I need to do to make sure my AI is safe?",
                           },
                           {
-                            title: "Suggestion 2",
+                            title: "AI Ethics",
                             description:
-                              "This is a description of suggestion 2",
-                          },
-                          {
-                            title: "Suggestion 3",
-                            description:
-                              "This is a description of suggestion 3",
+                              "What do I need to do to make sure my AI is ethical?",
                           },
                         ]
                   }
@@ -316,6 +316,7 @@ const ChatInput = ({
   inputPlaceholder?: string;
 }) => {
   const [message, setMessage] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
     e && e.preventDefault();
@@ -336,6 +337,7 @@ const ChatInput = ({
       },
     ]);
     setMessage("");
+    inputRef.current?.focus();
   };
   function handleKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
     // if enter but not shift+enter
@@ -363,6 +365,7 @@ const ChatInput = ({
         placeholder={inputPlaceholder || "Type your message"}
         disabled={disabled}
         autoFocus
+        ref={inputRef}
       />
 
       <Button
