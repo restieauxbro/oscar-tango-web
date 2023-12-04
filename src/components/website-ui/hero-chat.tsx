@@ -34,7 +34,7 @@ const HeroChat = () => {
   });
   const scale = useTransform(scrollY, [500, 1000], [1, 0.9]);
   const y = useTransform(scrollY, [100, 1100], [0, 200]);
-  console.log(section)
+  console.log(section);
 
   const blurMotion = useTransform(scrollY, [200, 1000], [0, 10]);
   const blur = useSpring(blurMotion, springEase);
@@ -43,7 +43,7 @@ const HeroChat = () => {
     <>
       <motion.div
         className="relative grid w-full max-w-screen-lg p-8 "
-     //   style={{ filter: blurMotionTemplate, scale }}
+        //   style={{ filter: blurMotionTemplate, scale }}
       >
         <AnimatePresence>
           {true && (
@@ -68,6 +68,7 @@ const HeroChat = () => {
                 "mb-8 text-5xl font-extrabold text-cyan-900 sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl",
               )}
             >
+              {process.env.VERCEL_URL}
               Act today,
               <br />
               Lead tomorrow
@@ -77,10 +78,10 @@ const HeroChat = () => {
             </p>
           </div>
         </AnimateFromHidden>
-          <div className="max-w-screen-md">
-            <ChatUI inputPlaceholder="Get some initial advice" />
-          </div>
-      <div ref={section} />
+        <div className="max-w-screen-md">
+          <ChatUI inputPlaceholder="Get some initial advice" />
+        </div>
+        <div ref={section} />
       </motion.div>
     </>
   );
