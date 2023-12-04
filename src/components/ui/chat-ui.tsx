@@ -184,6 +184,7 @@ const ChatBubble = ({
         ],
         functions: [queryKnowledgeBaseDefinition],
       });
+      console.log("aiResponse", aiResponse);
       if (aiResponse?.type === "text") {
         setChatHistory((prev) => {
           const newChatHistory = [...prev];

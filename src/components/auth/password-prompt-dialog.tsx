@@ -58,7 +58,7 @@ const PasswordPromptDialog = ({ client }: { client: string }) => {
               </p>
             </AnimateFromHidden>
           </div>
-          <LoadingButton type="submit" {...{ loading, loaderFill: "white" }}>
+          <LoadingButton type="submit" {...{ loading, loaderFill: "fill-white" }}>
             Submit
           </LoadingButton>
         </form>

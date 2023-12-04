@@ -1,10 +1,7 @@
 "use client";
 
-import { useChat } from "ai/react";
 import React, { useRef } from "react";
-import { captionStyles } from "../ui/typography";
 import { cn } from "@/lib/utils";
-import { Input } from "../ui/input";
 import Balancer from "react-wrap-balancer";
 import { headingStyles } from "@/components/ui/typography";
 import AnimateFromHidden from "../animations/AnimateFromHidden";
@@ -68,7 +65,6 @@ const HeroChat = () => {
                 "mb-8 text-5xl font-extrabold text-cyan-900 sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl",
               )}
             >
-              {process.env.VERCEL_URL}
               Act today,
               <br />
               Lead tomorrow

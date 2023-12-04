@@ -28,7 +28,7 @@ const ParalaxSection = () => {
           width={1920}
           height={1080}
           quality={100}
-          className="h-full scale-x-[-1] object-cover opacity-60"
+          className="h-full w-full scale-x-[-1] object-cover opacity-60"
           style={{ objectFit: "cover" }}
           loading="eager"
         />

@@ -23,7 +23,8 @@ export default function RootLayout({
       <body className={urbanist.className}>
         <GTag />
         <AuthWall client="oscar-tango">
-          <Header /> {children}
+          <Header /> 
+          {children}
         </AuthWall>
         <Analytics />
       </body>
