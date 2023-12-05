@@ -62,34 +62,32 @@ export function ProfileForm() {
     try {
       setFormState("submitting");
       console.log("trying recaptcha");
-      const captchaUserToken = await grecaptcha.enterprise.ready(async () => {
-        const token = await grecaptcha.enterprise.execute(
-          "6LcYsCUpAAAAAL2k6jL8Mn2AutiUC9U8igN2ivtz",
-          { action: "LOGIN" },
-        );
-        return token;
-      });
 
-      const passFail = await handleRecaptcha("LOGIN", captchaUserToken);
+      const captchaPassed = await handleRecaptcha();
 
-      const { error } = await supabase
-        .from("ot_enquiries")
-        .insert([{ ...values, created_at: new Date() }]);
+      if (!captchaPassed) throw new Error("Captcha failed");
 
-      // post to /api/notify-of-lead
-      // const res = await fetch("/api/notify-of-lead", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(values),
-      // });
-      // console.log(res);
-      if (error) {
-        throw error;
-      } else {
-        console.log("success");
-        //  setFormState("success");
+      if (captchaPassed) {
+        const { error } = await supabase
+          .from("ot_enquiries")
+          .insert([{ ...values, created_at: new Date() }]);
+
+        // post to /api/notify-of-lead
+        const res = await fetch("/api/notify-of-lead", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        console.log(res);
+        if (error) {
+          console.log("supabase error", error);
+          throw error;
+        } else {
+          console.log("success");
+          setFormState("success");
+        }
       }
     } catch (err) {
       console.log(err);
@@ -97,7 +95,7 @@ export function ProfileForm() {
     }
   }
 
-  const disabled = ["submitting", "success"].includes(formState) as boolean;
+  const disabled = ["submitting", "success", "error"].includes(formState) as boolean;
 
   return (
     <>
