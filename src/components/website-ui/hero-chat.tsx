@@ -66,10 +66,13 @@ const HeroChat = () => {
             >
               Act today,
               <br />
-              Lead tomorrow
+              lead tomorrow
             </h1>
             <p className="max-w-md text-slate-700 lg:text-lg xl:text-xl">
-              <Balancer>Drive your digital engagement with AI</Balancer>
+              <Balancer>
+                Transform your customer experience with artificial intelligence
+                solutions
+              </Balancer>
             </p>
           </div>
         </AnimateFromHidden>
