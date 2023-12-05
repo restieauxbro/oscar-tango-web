@@ -31,7 +31,6 @@ const HeroChat = () => {
   });
   const scale = useTransform(scrollY, [500, 1000], [1, 0.9]);
   const y = useTransform(scrollY, [100, 1100], [0, 200]);
-  console.log(section);
 
   const blurMotion = useTransform(scrollY, [200, 1000], [0, 10]);
   const blur = useSpring(blurMotion, springEase);

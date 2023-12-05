@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-cloud/recaptcha-enterprise": "^5.1.0",
     "@hookform/resolvers": "^3.3.2",
     "@notionhq/client": "^2.2.13",
     "@radix-ui/react-label": "^2.0.2",
