@@ -8,7 +8,11 @@ import React, {
 } from "react";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import sanitizeHtml from "sanitize-html";
-import { getChatStream, queryKnowledgeBaseDefinition } from "../../lib/openai";
+import {
+  FunctionCallResult,
+  contactOTDefnition,
+  getChatStream,
+} from "../../lib/openai";
 import AnimateFromHidden from "../animations/AnimateFromHidden";
 import { Button } from "./button";
 import { Send } from "lucide-react";
@@ -182,7 +186,7 @@ const ChatBubble = ({
             ? ([{ role: "assistant", content: commandinject }] as const)
             : []),
         ],
-        functions: [queryKnowledgeBaseDefinition],
+        functions: [contactOTDefnition],
       });
       console.log("aiResponse", aiResponse);
       if (aiResponse?.type === "text") {
@@ -196,15 +200,39 @@ const ChatBubble = ({
           return newChatHistory;
         });
       }
-
-      if (aiResponse?.type === "function") {
-        setTaskList((prev) => [
-          ...prev,
-          {
-            task: `Searching "<span class="text-cyan-500">${aiResponse.content.query}</span>"`,
-            state: "working",
-          },
-        ]);
+      const { type: aiResponseType, content: aiContent } =
+        (aiResponse as FunctionCallResult) || {};
+      if (aiResponseType === "function") {
+        if (aiContent?.name === "send_clients_details") {
+          setTaskList((prev) => [
+            ...prev,
+            { task: "Sending details to Oscar Tango", state: "working" },
+          ]);
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          setTaskList((prev) => [
+            ...prev,
+            { task: "Sending details to Oscar Tango", state: "done" },
+          ]);
+          setChatHistory((prev) => {
+            const newChatHistory = [...prev];
+            const index = newChatHistory.findIndex((item) => item.id === id);
+            newChatHistory[index] = {
+              ...newChatHistory[index],
+              content:
+                "Thanks, I have sent your details to Oscar Tango. They will be in touch shortly.",
+            };
+            return newChatHistory;
+          });
+        } else {
+          const generatedQuery = aiContent?.arguments.query;
+          setTaskList((prev) => [
+            ...prev,
+            {
+              task: `Searching <span class="text-cyan-500">${generatedQuery}</span>`,
+              state: "working",
+            },
+          ]);
+        }
       }
       setChatState("idle");
     } catch (error) {
@@ -316,7 +344,10 @@ const ChatInput = ({
   disabled: boolean;
   inputPlaceholder?: string;
 }) => {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(
+    "",
+    // "My name is Bruce McGee, I would like to start transitioning my business to AI. We're in the business of selling shoes. Can you please give my details to Oscar Tango? My email is b.mcgee@gmail.com",
+  );
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
