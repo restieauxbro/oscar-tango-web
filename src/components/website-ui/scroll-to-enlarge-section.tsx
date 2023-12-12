@@ -10,6 +10,7 @@ import {
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import BlinderAnim from "../animations/BlinderAnim";
 
 const ScrollToEnlarge = () => {
   const ref = useRef(null);
@@ -34,14 +35,16 @@ const ScrollToEnlarge = () => {
           <div className="px-8 sm:px-6 md:px-12">
             <div className="max-w-3xl">
               <div className="text-3xl lg:text-4xl">We are</div>
-              <h2 className="text-6xl font-medium sm:text-7xl lg:text-8xl pl-6 lg:pl-12">
+              <h2 className="pl-6 text-6xl font-medium sm:text-7xl lg:pl-12 lg:text-8xl">
                 {`Oscar Tango`}
               </h2>
             </div>
             <div className="ml-auto mr-0 mt-20 max-w-2xl">
-              <h2 className="text-lg sm:text-xl lg:text-2xl">
-                {`We're a forward-thinking digital agency, dedicated to developing smart, bespoke AI solutions tailored to your business needs. Our expertise lies in providing insightful guidance and cutting-edge strategies, propelling your business into the new digital era. Partner with us to fully leverage the transformative power of AI.`}
-              </h2>
+              <BlinderAnim
+                text="We're a forward-thinking digital agency, dedicated to developing smart, bespoke AI solutions tailored to your business needs. Our expertise lies in providing insightful guidance and cutting-edge strategies, propelling your business into the new digital era. Partner with us to fully leverage the transformative power of AI."
+                tag="h3"
+                className="text-lg sm:text-xl lg:text-2xl"
+              />
             </div>
           </div>
 
