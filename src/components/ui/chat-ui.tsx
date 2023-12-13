@@ -182,7 +182,7 @@ const ChatBubble = ({
 
       const aiResponse = await getChatStream({
         setTypingText,
-        useFunctionJson: (json) => {
+        utilizeJsonString: (json) => {
           if (
             !function_called &&
             json.includes('{"function_call": {"name": "send_clients_details')

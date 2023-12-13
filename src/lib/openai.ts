@@ -31,12 +31,12 @@ export type FunctionCallResult = {
 
 export const getChatStream = async ({
   setTypingText,
-  useFunctionJson,
+  utilizeJsonString,
   messages,
   functions,
 }: {
   setTypingText: React.Dispatch<React.SetStateAction<string>>;
-  useFunctionJson?: (returnedJson: string) => void; // if the function returns JSON, this function will be called with the JSON to make UI changes as it's streamed
+  utilizeJsonString?: (returnedJson: string) => void; // if the function returns JSON, this function will be called with the JSON to make UI changes as it's streamed
   messages: ChatMessage[];
   functions?: OpenAIFunctionDefinition[];
 }): Promise<
@@ -82,7 +82,7 @@ export const getChatStream = async ({
         if (buffer.startsWith(FUNCTION_CALL_PREFIX)) {
           // Handle function call
           cognitionState = "function";
-          useFunctionJson && useFunctionJson(buffer);
+          utilizeJsonString && utilizeJsonString(buffer);
         } else {
           // Not a function call, update the state with the buffered data
           let textForState = bufferUsed ? dataString : buffer;
@@ -169,5 +169,5 @@ export const contactOTDefnition: OpenAIFunctionDefinition = {
 };
 
 type FunctionReturnType = {
-  [K in keyof OpenAIFunctionDefinition['parameters']['properties']]: OpenAIFunctionDefinition['parameters']['properties'][K]['type']
+  [K in keyof OpenAIFunctionDefinition["parameters"]["properties"]]: OpenAIFunctionDefinition["parameters"]["properties"][K]["type"];
 };
