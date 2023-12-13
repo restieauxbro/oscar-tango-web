@@ -377,7 +377,8 @@ const ChatInput = ({
   inputPlaceholder?: string;
 }) => {
   const [message, setMessage] = useState(
-    "My name is Bruce McGee, I would like to start transitioning my business to AI. We're in the business of selling shoes. Can you please give my details to Oscar Tango? My email is b.mcgee@gmail.com",
+    "",
+    // "My name is Bruce McGee, I would like to start transitioning my business to AI. We're in the business of selling shoes. Can you please give my details to Oscar Tango? My email is b.mcgee@gmail.com",
   );
   const inputRef = useRef<HTMLInputElement>(null);
 
