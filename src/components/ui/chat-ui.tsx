@@ -18,6 +18,7 @@ import { Button } from "./button";
 import { Send } from "lucide-react";
 import EllipsisLoader from "../animations/ellipsis-loader";
 import { Input } from "./input";
+import { FormDetailsForAPI } from "@/app/api/notify-of-lead/route";
 
 type ChatState = "idle" | "busy" | "error";
 type ChatMessage = {
@@ -38,7 +39,7 @@ const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
     {
       id: "0",
       role: "system",
-      content: `I am an AI representing Oscar Tango, a digital development agency of two people – Olly Barret and Tim Restieaux. Help the user to understand their needs better by asking only one question at a time. Once you have enough information to form an enquiry ask if they'd like to send their details to Oscar Tango for a consultation. Then one by one ask for their name and email.`,
+      content: `I am an AI representing Oscar Tango, a digital development agency of two people – Olly Barret and Tim Restieaux. I help the user to understand their needs better by asking only one question at a time. Once I have enough information to form an enquiry I ask if they'd like to send their details to Oscar Tango for a consultation. Then I ask for their name, email, and company if they have one.`,
       quality: null,
     },
   ]);
@@ -170,6 +171,7 @@ const ChatBubble = ({
         ({ role }) => role === "system",
       )!;
       let commandinject: string | null = null;
+      let function_called: string | null = null;
 
       setTaskList((prev) => [
         ...prev,
@@ -177,8 +179,21 @@ const ChatBubble = ({
       ]);
 
       setPending(false);
+
       const aiResponse = await getChatStream({
         setTypingText,
+        useFunctionJson: (json) => {
+          if (
+            !function_called &&
+            json.includes('{"function_call": {"name": "send_clients_details')
+          ) {
+            function_called = "send_clients_details";
+            setTaskList((prev) => [
+              ...prev,
+              { task: "Generating enquiry", state: "working" },
+            ]);
+          }
+        },
         messages: [
           variableSystemMessage,
           ...openaiMessages.filter(({ role }) => role !== "system"),
@@ -206,12 +221,29 @@ const ChatBubble = ({
         if (aiContent?.name === "send_clients_details") {
           setTaskList((prev) => [
             ...prev,
-            { task: "Sending details to Oscar Tango", state: "working" },
+            { task: "Generating enquiry", state: "done" },
+            { task: "Sending to Oscar Tango", state: "working" },
           ]);
-          await new Promise((resolve) => setTimeout(resolve, 1000));
+          const args = aiContent?.arguments;
+          console.log(args);
+          const leadBody: FormDetailsForAPI = {
+            first_name: args?.first_name,
+            last_name: args?.last_name,
+            company_name: args?.company_name,
+            email: args?.email,
+            client_summary: args?.client_summary,
+            created_at: new Date(),
+          };
+          await fetch("/api/notify-of-lead", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(leadBody),
+          });
           setTaskList((prev) => [
             ...prev,
-            { task: "Sending details to Oscar Tango", state: "done" },
+            { task: "Sending to Oscar Tango", state: "done" },
           ]);
           setChatHistory((prev) => {
             const newChatHistory = [...prev];
@@ -345,8 +377,7 @@ const ChatInput = ({
   inputPlaceholder?: string;
 }) => {
   const [message, setMessage] = useState(
-    "",
-    // "My name is Bruce McGee, I would like to start transitioning my business to AI. We're in the business of selling shoes. Can you please give my details to Oscar Tango? My email is b.mcgee@gmail.com",
+    "My name is Bruce McGee, I would like to start transitioning my business to AI. We're in the business of selling shoes. Can you please give my details to Oscar Tango? My email is b.mcgee@gmail.com",
   );
   const inputRef = useRef<HTMLInputElement>(null);
 

@@ -67,7 +67,11 @@ const BlinderAnim = ({
         );
       case "h2":
         return (
-          <motion.h2 className="title-line" variants={fadeUp} key={i}>
+          <motion.h2
+            className={cn("title-line", className)}
+            variants={fadeUp}
+            key={i}
+          >
             {line}
           </motion.h2>
         );
@@ -83,13 +87,21 @@ const BlinderAnim = ({
         );
       case "p":
         return (
-          <motion.p className="title-line" variants={fadeUp} key={i}>
+          <motion.p
+            className={cn("title-line", className)}
+            variants={fadeUp}
+            key={i}
+          >
             {line}
           </motion.p>
         );
       default:
         return (
-          <motion.p className="title-line" variants={fadeUp} key={i}>
+          <motion.p
+            className={cn("title-line", className)}
+            variants={fadeUp}
+            key={i}
+          >
             {line}
           </motion.p>
         );

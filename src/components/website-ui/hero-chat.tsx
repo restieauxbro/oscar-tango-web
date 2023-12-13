@@ -2,10 +2,8 @@
 
 import React, { useRef } from "react";
 import { cn } from "@/lib/utils";
-import Balancer from "react-wrap-balancer";
 import { headingStyles } from "@/components/ui/typography";
 import AnimateFromHidden from "../animations/AnimateFromHidden";
-import { Button } from "../ui/button";
 import Image from "next/image";
 import {
   useScroll,
@@ -16,6 +14,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import ChatUI from "../ui/chat-ui";
+import BlinderAnim from "../animations/BlinderAnim";
 
 const HeroChat = () => {
   const springEase = {
@@ -52,6 +51,7 @@ const HeroChat = () => {
                 width={850}
                 height={850}
                 alt="big ideas"
+                priority
               />
             </motion.div>
           )}
@@ -68,12 +68,13 @@ const HeroChat = () => {
               <br />
               lead tomorrow
             </h1>
-            <p className="max-w-md text-slate-700 lg:text-lg xl:text-xl">
-              <Balancer>
-                Transform your customer experience with artificial intelligence
-                solutions
-              </Balancer>
-            </p>
+            <div className="max-w-[22rem] text-slate-700 lg:text-lg xl:text-xl">
+              <BlinderAnim
+                text="Transform your customer experience with artificial intelligence
+                solutions"
+                tag="p"
+              />
+            </div>
           </div>
         </AnimateFromHidden>
         <div className="max-w-screen-md">

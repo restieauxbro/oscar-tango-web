@@ -22,8 +22,7 @@ import { cn } from "@/lib/utils";
 import Balancer from "react-wrap-balancer";
 import Script from "next/script";
 import { handleRecaptcha } from "@/lib/recaptcha";
-
-declare const grecaptcha: any;
+import { FormDetailsForAPI } from "@/app/api/notify-of-lead/route";
 
 const formSchema = z.object({
   first_name: z.string().min(1, {
@@ -35,6 +34,7 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address",
   }),
+  phone: z.string().optional(),
   company_name: z.string().optional(),
   message: z.string().min(1, {
     message: "Please enter a message",
@@ -68,26 +68,21 @@ export function ProfileForm() {
       if (!captchaPassed) throw new Error("Captcha failed");
 
       if (captchaPassed) {
-        const { error } = await supabase
-          .from("ot_enquiries")
-          .insert([{ ...values, created_at: new Date() }]);
-
+        const body: FormDetailsForAPI = {...values, created_at: new Date()}
         // post to /api/notify-of-lead
         const res = await fetch("/api/notify-of-lead", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(values),
+          body: JSON.stringify(body),
         });
         console.log(res);
-        if (error) {
-          console.log("supabase error", error);
-          throw error;
-        } else {
-          console.log("success");
+        if (res.ok) {
           setFormState("success");
         }
+      } else {
+        throw new Error("Captcha failed");
       }
     } catch (err) {
       console.log(err);
@@ -95,7 +90,9 @@ export function ProfileForm() {
     }
   }
 
-  const disabled = ["submitting", "success", "error"].includes(formState) as boolean;
+  const disabled = ["submitting", "success", "error"].includes(
+    formState,
+  ) as boolean;
 
   return (
     <>
@@ -111,7 +108,7 @@ export function ProfileForm() {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-4"
               >
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-4 sm:grid-cols-2">
                   <FormField
                     control={form.control}
                     name="first_name"
@@ -149,24 +146,44 @@ export function ProfileForm() {
                     )}
                   />
                 </div>
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="mb-2">Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="john@gmail.com"
-                          {...field}
-                          className="bg-slate-900/80 text-white backdrop-blur-sm focus:bg-slate-800/70"
-                          disabled={disabled}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="mb-2">Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="john@gmail.com"
+                            {...field}
+                            className="bg-slate-900/80 text-white backdrop-blur-sm focus:bg-slate-800/70"
+                            disabled={disabled}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="mb-2">Phone</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="021 378 3689"
+                            {...field}
+                            className="bg-slate-900/80 text-white backdrop-blur-sm focus:bg-slate-800/70"
+                            disabled={disabled}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
                 <FormField
                   control={form.control}
                   name="company_name"
