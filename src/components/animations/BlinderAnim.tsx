@@ -45,7 +45,7 @@ const BlinderAnim = ({
   const tester = useRef(null);
   const ref = useRef(null);
   const isInView = useInView(ref, {
-    margin: "0px 100px -100px 0px",
+    margin: "0px 0px -200px 0px",
   });
 
   const { width } = useWindowSize();

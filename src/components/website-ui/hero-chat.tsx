@@ -37,50 +37,52 @@ const HeroChat = () => {
   return (
     <>
       <motion.div
-        className="relative grid w-full max-w-screen-lg p-8 "
+        className="relative grid w-full overflow-x-clip pt-24 md:pt-16"
         //   style={{ filter: blurMotionTemplate, scale }}
       >
-        <AnimatePresence>
-          {true && (
-            <motion.div
-              className="pointer-events-none absolute -right-52 -top-24 hidden md:block lg:right-[-20rem]"
-              exit={{ opacity: 0, transition: { duration: 0.8 } }}
-            >
-              <Image
-                src="/images/isometric-phone-1.png"
-                width={850}
-                height={850}
-                alt="big ideas"
-                priority
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <AnimateFromHidden show={true} animateOnMount={false}>
-          <div className="mb-12 max-w-xl lg:mb-16 lg:max-w-3xl">
-            <h1
-              className={cn(
-                headingStyles,
-                "mb-8 text-5xl font-extrabold text-cyan-900 sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl",
-              )}
-            >
-              Act today,
-              <br />
-              lead tomorrow
-            </h1>
-            <div className="max-w-[22rem] text-slate-700 lg:text-lg xl:text-xl">
-              <BlinderAnim
-                text="Transform your customer experience with artificial intelligence
+        <div className="relative mx-auto w-screen max-w-screen-lg px-8 py-32">
+          <AnimatePresence>
+            {true && (
+              <motion.div
+                className="pointer-events-none absolute -right-52 -top-24 hidden md:block lg:right-[-20rem]"
+                exit={{ opacity: 0, transition: { duration: 0.8 } }}
+              >
+                <Image
+                  src="/images/isometric-phone-1.png"
+                  width={850}
+                  height={850}
+                  alt="big ideas"
+                  priority
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <AnimateFromHidden show={true} animateOnMount={false}>
+            <div className="mb-12 max-w-xl lg:mb-16 lg:max-w-3xl">
+              <h1
+                className={cn(
+                  headingStyles,
+                  "mb-8 text-5xl font-extrabold text-cyan-900 sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl",
+                )}
+              >
+                Act today,
+                <br />
+                lead tomorrow
+              </h1>
+              <div className="max-w-[22rem] text-slate-700 lg:text-lg xl:text-xl">
+                <BlinderAnim
+                  text="Transform your customer experience with artificial intelligence
                 solutions"
-                tag="p"
-              />
+                  tag="p"
+                />
+              </div>
             </div>
+          </AnimateFromHidden>
+          <div className="max-w-screen-md">
+            <ChatUI inputPlaceholder="Get some initial advice" />
           </div>
-        </AnimateFromHidden>
-        <div className="max-w-screen-md">
-          <ChatUI inputPlaceholder="Get some initial advice" />
+          <div ref={section} />
         </div>
-        <div ref={section} />
       </motion.div>
     </>
   );

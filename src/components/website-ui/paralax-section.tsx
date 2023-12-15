@@ -5,7 +5,6 @@ import Image from "next/image";
 import { ProfileForm } from "./contact-form";
 import Balancer from "react-wrap-balancer";
 import { motion, useScroll, useTransform } from "framer-motion";
-import BlinderAnim from "../animations/BlinderAnim";
 
 const ParalaxSection = () => {
   const section = useRef(null);
@@ -39,13 +38,13 @@ const ParalaxSection = () => {
           <h2 className="text-3xl font-medium sm:text-4xl md:text-6xl lg:text-7xl">
             <Balancer>{`Leading with AI, so you can too`} </Balancer>
           </h2>
-          <div className="mt-8">
+          {/* <div className="mt-8">
             <BlinderAnim
-              text="Oscar Tango is based in Nelson, New Zealand and Melbourne, Australia. We’re a fully remote team of passionate and highly experienced digital professionals. We’re excited to apply our skills and knowledge to helping your organisation develop AI solutions. Get in touch today."
+              text="Get in touch and tell us about your project, we'd love to hear from you."
               tag="p"
               className="text-base xl:text-lg"
             />
-          </div>
+          </div> */}
         </div>
         <div className="ml-auto mr-0 mt-12 lg:max-w-lg">
           <ProfileForm />

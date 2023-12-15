@@ -37,8 +37,11 @@ export async function POST(request: Request) {
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
     const msg = {
-      to: "olly@oscartango.digital", // Change to your recipient
-      from: "no-reply@oscartango.digital", // Change to your verified sender
+      to:
+        process.env.VERCEL_ENV === "development"
+          ? "tim@oscartango.digital"
+          : "olly@oscartango.digital",
+      from: "no-reply@oscartango.digital",
       subject: `Enquiry from ${first_name} ${last_name}`,
       // text: "",
       html: `<style>
@@ -57,11 +60,7 @@ export async function POST(request: Request) {
         ${company_name ? `<p>Company name: ${company_name}</p>` : ""}
         ${phone ? `<p>Phone: <a href="tel:${phone}">${phone}</a></p>` : ""}
         ${message ? `<p>Message: ${message}</p>` : ""}
-        ${
-          client_summary
-            ? `<p>Client summary: ${client_summary}</p>`
-            : ""
-        }
+        ${client_summary ? `<p>Client summary: ${client_summary}</p>` : ""}
         `,
     };
     sgMail.send(msg).then(() => {

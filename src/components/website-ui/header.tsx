@@ -7,15 +7,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useKeyPress } from "@/utils/hooks";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header = () => {
   return (
     <header className="fixed z-10 w-full px-4 py-4">
       <div className="flex justify-between">
         <Link href={"/"} className="font-medium">
-          <div className="h-16 w-16 origin-top-left bg-cyan-600 p-2 text-sm leading-3 text-white">
+          {/* <div className="h-16 w-16 origin-top-left bg-cyan-600 p-2 text-sm leading-3 text-white">
             Oscar <br /> Tango
-          </div>
+          </div> */}
+          <Image src="/images/oscartango_logo.svg" alt="Oscar Tango" width={82} height={82} className="border border-slate-900 rounded-md bg-white/70" />
         </Link>
         <div></div>
       </div>

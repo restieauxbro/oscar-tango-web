@@ -32,7 +32,7 @@ const ScrollToEnlarge = () => {
       </div>
       <section ref={ref} className="text-white">
         <div className="grid min-h-screen place-content-center py-12 md:py-16  lg:py-[clamp(4rem,20lvh,8rem)]">
-          <div className="px-8 sm:px-6 md:px-12">
+          <div className="mx-auto w-screen max-w-screen-lg px-8 sm:px-6 md:px-12">
             <div className="max-w-3xl">
               <div className="text-3xl lg:text-4xl">We are</div>
               <h2 className="pl-6 text-6xl font-medium sm:text-7xl lg:pl-12 lg:text-8xl">
@@ -48,7 +48,7 @@ const ScrollToEnlarge = () => {
             </div>
           </div>
 
-          <div className="grid w-screen max-w-screen-lg gap-4 px-8 pt-12 md:grid-cols-3 lg:pt-20">
+          <div className="grid w-screen max-w-screen-xl gap-4 px-8 pt-12 md:grid-cols-3 lg:pt-20">
             {[
               {
                 title: "Translating AI",

@@ -20,7 +20,7 @@ import EllipsisLoader from "../animations/ellipsis-loader";
 import { Input } from "./input";
 import { FormDetailsForAPI } from "@/app/api/notify-of-lead/route";
 
-type ChatState = "idle" | "busy" | "error";
+type ChatState = "idle" | "busy" | "error" | "disabled";
 type ChatMessage = {
   role: "system" | "assistant" | "user";
   content: string;
@@ -45,6 +45,16 @@ const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
   ]);
   const [state, setState] = useState<ChatState>("idle");
 
+  const inputRef = useRef<HTMLInputElement>(null);
+  function focusInput() {
+    console.log("focusing input", inputRef.current);
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 100); // 100 milliseconds delay
+  }
+
   return (
     <>
       <div className="w-full place-items-center text-base">
@@ -60,19 +70,19 @@ const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
                       ? []
                       : [
                           {
-                            title: "Easiest wins",
+                            title: "Customizing AI to Your Business Needs",
                             description:
-                              "What are the easiest wins in AI right now?",
+                              "Ask us how we personalize AI solutions for your unique needs.",
                           },
                           {
-                            title: "AI Safety",
+                            title: "Enhancing Customer Engagement",
                             description:
-                              "What do I need to do to make sure my AI is safe?",
+                              "Explore how we can help you elevate your customer engagement with AI.",
                           },
                           {
-                            title: "AI Ethics",
+                            title: "Future-Proofing Your Business",
                             description:
-                              "What do I need to do to make sure my AI is ethical?",
+                              "Learn how we can help you future-proof your business with cutting-edge AI.",
                           },
                         ]
                   }
@@ -88,6 +98,7 @@ const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
                           chatHistory,
                           setChatHistory,
                           setChatState: setState,
+                          focusInput,
                         }}
                       />
                     );
@@ -99,8 +110,9 @@ const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
                 {...{
                   chatHistory,
                   setChatHistory,
-                  disabled: state === "busy",
+                  disabled: state === "busy" || state === "disabled",
                   inputPlaceholder,
+                  inputRef,
                 }}
               />
             </div>
@@ -117,11 +129,10 @@ const ChatBubble = ({
   content,
   role,
   id,
-  quality,
-  feedback,
   chatHistory,
   setChatHistory,
   setChatState,
+  focusInput,
 }: {
   content: string | null;
   role: "system" | "assistant" | "user";
@@ -131,6 +142,7 @@ const ChatBubble = ({
   chatHistory: ClientChatMessage[];
   setChatHistory: Dispatch<SetStateAction<ClientChatMessage[]>>;
   setChatState: Dispatch<SetStateAction<ChatState>>;
+  focusInput: () => void;
 }) => {
   const [typingText, setTypingText] = useState("");
   const [pending, setPending] = useState(false);
@@ -255,6 +267,7 @@ const ChatBubble = ({
             };
             return newChatHistory;
           });
+          setChatState("disabled");
         } else {
           const generatedQuery = aiContent?.arguments.query;
           setTaskList((prev) => [
@@ -266,7 +279,9 @@ const ChatBubble = ({
           ]);
         }
       }
-      setChatState("idle");
+
+      setChatState((c) => (c !== "disabled" ? "idle" : "disabled"));
+      focusInput();
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {
       } else {
@@ -370,17 +385,18 @@ const ChatInput = ({
   setChatHistory,
   disabled,
   inputPlaceholder,
+  inputRef,
 }: {
   chatHistory: ClientChatMessage[];
   setChatHistory: Dispatch<SetStateAction<ClientChatMessage[]>>;
   disabled: boolean;
   inputPlaceholder?: string;
+  inputRef: React.RefObject<HTMLInputElement>;
 }) => {
   const [message, setMessage] = useState(
     "",
     // "My name is Bruce McGee, I would like to start transitioning my business to AI. We're in the business of selling shoes. Can you please give my details to Oscar Tango? My email is b.mcgee@gmail.com",
   );
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
     e && e.preventDefault();
@@ -401,7 +417,6 @@ const ChatInput = ({
       },
     ]);
     setMessage("");
-    inputRef.current?.focus();
   };
   function handleKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
     // if enter but not shift+enter
@@ -428,7 +443,6 @@ const ChatInput = ({
         id="chat-input"
         placeholder={inputPlaceholder || "Type your message"}
         disabled={disabled}
-        autoFocus
         ref={inputRef}
       />
 
@@ -465,11 +479,11 @@ const OptionsButtons = ({
   setChatHistory: Dispatch<SetStateAction<ClientChatMessage[]>>;
 }) => {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid gap-4 md:grid-cols-3">
       {suggestions?.map((suggestion, i) => (
         <Button
           key={i}
-          className="h-full w-full rounded-lg border border-slate-300 bg-slate-100/50 px-6 py-6 text-left text-base text-zinc-800 shadow-md backdrop-blur-md hover:bg-slate-50/70"
+          className="h-full w-full justify-start rounded-lg border border-slate-300 bg-slate-100/50 px-6 py-6 text-left text-base text-zinc-800 shadow-md backdrop-blur-md hover:bg-slate-50/70"
           onClick={() => {
             setChatHistory((prev) => [
               ...prev,
@@ -490,7 +504,7 @@ const OptionsButtons = ({
         >
           <div>
             <h2 className="mb-2 font-semibold">{suggestion.title}</h2>
-            <p className="font-normal">{suggestion.description}</p>
+            <p className="text-sm font-normal">{suggestion.description}</p>
           </div>
         </Button>
       ))}
