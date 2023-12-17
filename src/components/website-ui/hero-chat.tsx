@@ -37,10 +37,10 @@ const HeroChat = () => {
   return (
     <>
       <motion.div
-        className="relative grid w-full overflow-x-clip pt-24 md:pt-16"
+        className="relative grid w-full overflow-x-clip pt-16 md:pt-4"
         //   style={{ filter: blurMotionTemplate, scale }}
       >
-        <div className="relative mx-auto w-screen max-w-screen-lg px-8 py-32">
+        <div className="relative mx-auto w-screen max-w-screen-lg px-8 py-8">
           <AnimatePresence>
             {true && (
               <motion.div

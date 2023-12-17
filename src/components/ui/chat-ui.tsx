@@ -73,16 +73,21 @@ const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
                             title: "Customizing AI to Your Business Needs",
                             description:
                               "Ask us how we personalize AI solutions for your unique needs.",
+                            value: "How can you customize AI to my business needs?",
                           },
                           {
                             title: "Enhancing Customer Engagement",
                             description:
                               "Explore how we can help you elevate your customer engagement with AI.",
+                            value:
+                              "How can you help me with customer engagement?",
                           },
                           {
                             title: "Future-Proofing Your Business",
                             description:
                               "Learn how we can help you future-proof your business with cutting-edge AI.",
+                            value:
+                              "How can you help me future-proof my business?",
                           },
                         ]
                   }
@@ -436,7 +441,7 @@ const ChatInput = ({
     >
       <Input
         type="text"
-        className="w-full "
+        className="w-full pr-12"
         onChange={(e) => setMessage(e.target.value)}
         value={message}
         onKeyDown={(e: any) => handleKeyDown(e)}
@@ -475,6 +480,7 @@ const OptionsButtons = ({
     title: string;
     description: string;
     value?: string;
+    incomplete?: boolean;
   }[];
   setChatHistory: Dispatch<SetStateAction<ClientChatMessage[]>>;
 }) => {
@@ -485,21 +491,23 @@ const OptionsButtons = ({
           key={i}
           className="h-full w-full justify-start rounded-lg border border-slate-300 bg-slate-100/50 px-6 py-6 text-left text-base text-zinc-800 shadow-md backdrop-blur-md hover:bg-slate-50/70"
           onClick={() => {
-            setChatHistory((prev) => [
-              ...prev,
-              {
-                id: crypto.randomUUID(),
-                role: "user",
-                content: suggestion.value || suggestion.description,
-                quality: null,
-              },
-              {
-                id: crypto.randomUUID(),
-                role: "assistant",
-                content: null,
-                quality: null,
-              },
-            ]);
+            if (suggestion.incomplete) {
+            } else
+              setChatHistory((prev) => [
+                ...prev,
+                {
+                  id: crypto.randomUUID(),
+                  role: "user",
+                  content: suggestion.value || suggestion.description,
+                  quality: null,
+                },
+                {
+                  id: crypto.randomUUID(),
+                  role: "assistant",
+                  content: null,
+                  quality: null,
+                },
+              ]);
           }}
         >
           <div>

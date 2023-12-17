@@ -19,7 +19,7 @@ export default function Home() {
           </h2>
           <div className="mx-auto grid max-w-screen-2xl grid-cols-2 gap-12 px-8">
             <div></div>
-            <div className="max-w-xl mx-auto">
+            <div className="mx-auto max-w-xl">
               {[
                 {
                   title: "Custom Custom Knowledge Bases",
@@ -54,13 +54,13 @@ export default function Home() {
               ].map((item, i) => (
                 <div key={i} className="mb-24 lg:mb-48">
                   <h3 className="mb-4 text-4xl">{item.title}</h3>
-                 <BlinderAnim text={item.description} tag="p" />
+                  <p>{item.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <div className="grid place-items-center py-[clamp(5rem,30vh,10rem)]">
+        <div className="grid place-items-center py-[clamp(5rem,10vh,10rem)]">
           <div className="mx-auto max-w-screen-lg px-8 py-12 sm:px-6  md:py-16 lg:py-[clamp(4rem,20lvh,8rem)]">
             <div className="max-w-2xl">
               <BlinderAnim
