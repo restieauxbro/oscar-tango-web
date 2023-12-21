@@ -17,7 +17,13 @@ const Header = () => {
           {/* <div className="h-16 w-16 origin-top-left bg-cyan-600 p-2 text-sm leading-3 text-white">
             Oscar <br /> Tango
           </div> */}
-          <Image src="/images/oscartango_logo.svg" alt="Oscar Tango" width={82} height={82} className="border border-slate-900 rounded-md bg-white/70" />
+          <Image
+            src="/images/oscartango_logo.svg"
+            alt="Oscar Tango"
+            width={82}
+            height={82}
+            className="origin-top-left scale-75 rounded-md border border-slate-900 bg-white md:bg-white/70 md:scale-100"
+          />
         </Link>
         <div></div>
       </div>

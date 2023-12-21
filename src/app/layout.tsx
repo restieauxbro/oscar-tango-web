@@ -20,10 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={urbanist.className}>
+      <body className={`${urbanist.className} snap-y snap-mandatory`}>
         <GTag />
         <AuthWall client="oscar-tango">
-          <Header /> 
+          <Header />
           {children}
         </AuthWall>
         <Analytics />

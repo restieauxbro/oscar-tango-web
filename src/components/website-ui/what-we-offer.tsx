@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useInView } from "framer-motion";
+import { useInView, useScroll, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
@@ -14,7 +14,7 @@ const WhatWeOffer = () => {
       {imageItems.map(({ title, imageUrl }, i) => (
         <motion.div
           className={cn(
-            "absolute left-0 top-0 h-full w-[calc(50%-1.5rem)] bg-purple-500",
+            "absolute left-0 top-0 hidden h-full w-[calc(50%-1.5rem)] bg-purple-500 opacity-0 md:block",
           )}
           animate={{
             opacity: title === image ? 1 : 0,
@@ -24,18 +24,20 @@ const WhatWeOffer = () => {
           <div className="sticky top-0 h-lvh w-full">
             <Image
               src={imageUrl}
+              priority={i === 0}
               layout="fill"
               alt="Knowledge base"
               className="h-screen w-full object-cover"
+              placeholder="blur"
             />
           </div>
         </motion.div>
       ))}
 
-      <h2 className="sticky top-[calc(100vh-2.6lh)] grid grid-cols-2 py-12 pl-4 text-6xl font-semibold text-cyan-50 sm:text-7xl md:text-8xl lg:text-9xl lg:leading-[0.8]">
+      <h2 className="top-[calc(100vh-2.6lh)] grid pb-0 pl-4 pt-12 text-5xl font-semibold text-cyan-700 sm:text-7xl md:sticky md:grid-cols-2 md:pb-12 md:text-8xl md:text-cyan-50 lg:text-9xl lg:leading-[0.8]">
         What <br /> we offer
       </h2>
-      <div className="mx-auto grid max-w-screen-2xl grid-cols-2 gap-12 px-8">
+      <div className="mx-auto grid max-w-screen-2xl gap-12 px-8 md:grid-cols-2">
         <div></div>
         <div className="mx-auto max-w-xl">
           {serviceItems.map((item, i) => (
@@ -67,7 +69,12 @@ const OfferingItem = ({
   setImage: React.Dispatch<React.SetStateAction<ImageTitle>>;
 }) => {
   const ref = useRef(null);
-  const inView = useInView(ref, { margin: "0px 300px -300px 0px" });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+  });
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
+  const inView = useInView(ref, { margin: "0px 300px -250px 0px" });
   useEffect(() => {
     if (inView) {
       setImage(title);
@@ -75,18 +82,26 @@ const OfferingItem = ({
   }, [inView]);
 
   return (
-    <div className="mb-12 md:mb-[clamp(10rem,33lvh,30rem)]">
-      <h3
-        className={cn(
-          "mb-4 text-pretty text-3xl transition-colors duration-300 ease-in-out lg:text-4xl",
-          title === image ? "text-cyan-700" : "text-neutral-600",
-        )}
-        ref={ref}
-      >
-        {title}
-      </h3>
-      <p className="text-pretty text-lg">{description}</p>
-    </div>
+    <motion.div
+      className={cn(
+        "grid min-h-[70lvh] snap-start snap-always place-items-center py-12 transition-opacity",
+        title === image ? "opacity-100" : "opacity-50",
+      )}
+      style={{ scale }}
+    >
+      <div>
+        <h3
+          className={cn(
+            "mb-4 text-pretty text-3xl transition-colors duration-300 ease-in-out lg:text-4xl",
+            title === image ? "text-cyan-700" : "text-neutral-600",
+          )}
+          ref={ref}
+        >
+          {title}
+        </h3>
+        <p className="text-pretty text-lg">{description}</p>
+      </div>
+    </motion.div>
   );
 };
 
