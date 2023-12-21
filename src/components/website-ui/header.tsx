@@ -20,9 +20,9 @@ const Header = () => {
           <Image
             src="/images/oscartango_logo.svg"
             alt="Oscar Tango"
-            width={82}
-            height={82}
-            className="origin-top-left scale-75 rounded-md border border-slate-900 bg-white md:bg-white/70 md:scale-100"
+            width={90}
+            height={90}
+            className="origin-top-left scale-75 bg-white md:bg-white/70 md:scale-100"
           />
         </Link>
         <div></div>

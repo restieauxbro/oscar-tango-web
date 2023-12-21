@@ -26,7 +26,7 @@ const WhatWeOffer = () => {
               src={imageUrl}
               priority={i === 0}
               layout="fill"
-              alt="Knowledge base"
+              alt={title}
               className="h-screen w-full object-cover"
               placeholder="blur"
               blurDataURL={`/_next/image?url=https://oscartango.digital${imageUrl}&w=16&q=1`}
