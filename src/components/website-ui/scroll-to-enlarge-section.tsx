@@ -14,8 +14,11 @@ import BlinderAnim from "../animations/BlinderAnim";
 
 const ScrollToEnlarge = () => {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll();
-  const x = useTransform(scrollYProgress, [0.03, 0.2], [0.9, 1]);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end end"],
+  });
+  const x = useTransform(scrollYProgress, [0.03, 0.25], [0.9, 1]);
   const scale = useSpring(x, {
     stiffness: 200,
     damping: 20,

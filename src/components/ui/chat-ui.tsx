@@ -61,7 +61,7 @@ const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
         <div className="w-full">
           {/* <pre>{JSON.stringify(chatHistory, null, 2)}</pre> */}
           <LayoutGroup>
-            <div className="grid gap-4">
+            <div className="grid max-w-screen-md gap-4">
               <AnimatePresence mode="popLayout">
                 <OptionsButtons
                   setChatHistory={setChatHistory}
@@ -73,7 +73,8 @@ const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
                             title: "Customizing AI to Your Business Needs",
                             description:
                               "Ask us how we personalize AI solutions for your unique needs.",
-                            value: "How can you customize AI to my business needs?",
+                            value:
+                              "How can you customize AI to my business needs?",
                           },
                           {
                             title: "Enhancing Customer Engagement",
@@ -122,6 +123,9 @@ const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
               />
             </div>
           </LayoutGroup>
+          <AnimateFromHidden show={chatHistory.length > 1}>
+            <div className="pt-12"></div>
+          </AnimateFromHidden>
         </div>
       </div>
     </>
@@ -441,7 +445,7 @@ const ChatInput = ({
     >
       <Input
         type="text"
-        className="w-full pr-12"
+        className="w-full rounded-full border-slate-300 bg-white/60 px-6 py-6 pr-12  text-lg shadow-lg backdrop-blur-md focus:bg-white focus:shadow-xl focus:ring-2 focus:ring-offset-4"
         onChange={(e) => setMessage(e.target.value)}
         value={message}
         onKeyDown={(e: any) => handleKeyDown(e)}

@@ -15,11 +15,12 @@ const ParalaxSection = () => {
   const y = useTransform(scrollYProgress, [0, 1], [0, 180]);
   return (
     <section
-      className="lg:md-20 relative overflow-hidden bg-slate-800 px-8"
+      className="lg:md-20 relative overflow-clip bg-slate-800 px-8"
       ref={section}
+      style={{ contain: "paint" }}
     >
       <motion.div
-        className="h-[calc(100% + 180px)] preserve-3d absolute inset-0 -top-[180px] w-[120%]"
+        className="h-[calc(100% + 180px)] preserve-3d absolute inset-0 -top-[180px] w-[120%] bg-purple-800"
         style={{ y }}
       >
         <Image
@@ -28,7 +29,7 @@ const ParalaxSection = () => {
           width={1920}
           height={1080}
           quality={100}
-          className="h-full w-full scale-x-[-1] object-cover opacity-60"
+          className="h-full w-full scale-x-[-1] object-cover opacity-80"
           style={{ objectFit: "cover" }}
           loading="eager"
         />

@@ -78,7 +78,7 @@ const HeroChat = () => {
               </div>
             </div>
           </AnimateFromHidden>
-          <div className="max-w-screen-md">
+          <div className="max-w-screen-lg">
             <ChatUI inputPlaceholder="Get some initial advice" />
           </div>
           <div ref={section} />
