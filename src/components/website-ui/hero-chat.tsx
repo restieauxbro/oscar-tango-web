@@ -53,6 +53,7 @@ const HeroChat = () => {
                   height={850}
                   alt="big ideas"
                   priority
+                  blurDataURL={`/_next/image?url=${"oscartango.digital/images/isometric-phone-1.png"}&w=16&q=1`}
                 />
               </motion.div>
             )}
