@@ -19,8 +19,9 @@ const WhatWeOffer = () => {
           animate={{
             opacity: title === image ? 1 : 0,
           }}
+          key={i}
         >
-          <div className="h-lvh sticky top-0 w-full">
+          <div className="sticky top-0 h-lvh w-full">
             <Image
               src={imageUrl}
               layout="fill"
@@ -77,8 +78,8 @@ const OfferingItem = ({
     <div className="mb-12 md:mb-[clamp(10rem,33lvh,30rem)]">
       <h3
         className={cn(
-          "text-pretty mb-4 text-3xl transition-colors duration-300 ease-in-out lg:text-4xl",
-          title === image ? "text-purple-800" : "text-neutral-600",
+          "mb-4 text-pretty text-3xl transition-colors duration-300 ease-in-out lg:text-4xl",
+          title === image ? "text-cyan-700" : "text-neutral-600",
         )}
         ref={ref}
       >
