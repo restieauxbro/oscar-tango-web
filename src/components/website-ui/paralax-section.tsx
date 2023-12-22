@@ -52,7 +52,7 @@ const ParalaxSection = () => {
           </div> */}
         </div>
         <div className="ml-auto mr-0 mt-12 md:max-w-md lg:max-w-lg">
-          <h3 className="mb-4 text-3xl opacity-70">Let's chat</h3>
+          <h3 className="mb-4 text-3xl opacity-70">{"Let's chat"}</h3>
           <ProfileForm />
         </div>
       </div>
