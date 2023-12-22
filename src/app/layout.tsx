@@ -24,7 +24,6 @@ export default function RootLayout({
         <GTag />
         <AuthWall client="oscar-tango">
           <Header />
-          dev server
           {children}
         </AuthWall>
         <Analytics />
