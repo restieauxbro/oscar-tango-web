@@ -23,7 +23,8 @@ export default function RootLayout({
       <body className={`${urbanist.className} snap-y snap-mandatory`}>
         <GTag />
         <AuthWall client="oscar-tango">
-          <Header /> 
+          <Header />
+          dev server
           {children}
         </AuthWall>
         <Analytics />
