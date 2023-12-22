@@ -15,7 +15,7 @@ const ParalaxSection = () => {
   const y = useTransform(scrollYProgress, [0, 1], [0, 180]);
   return (
     <section
-      className="lg:md-20 relative overflow-clip bg-slate-800 px-8"
+      className="lg:md-20 min-h-lvh grid place-items-center relative overflow-clip bg-slate-800"
       ref={section}
       style={{ contain: "paint" }}
     >
@@ -34,7 +34,7 @@ const ParalaxSection = () => {
           loading="eager"
         />
       </motion.div>
-      <div className="relative mx-auto max-w-screen-lg px-8 py-20 text-white lg:py-28">
+      <div className="relative mx-auto w-screen max-w-screen-lg px-8 py-20 text-white lg:py-28">
         <div className="max-w-xl">
           <h2 className="text-3xl font-medium sm:text-4xl md:text-6xl lg:text-7xl">
             <Balancer>{`Leading with AI, so you can too`} </Balancer>
@@ -47,7 +47,7 @@ const ParalaxSection = () => {
             />
           </div> */}
         </div>
-        <div className="ml-auto mr-0 mt-12 lg:max-w-lg">
+        <div className="ml-auto mr-0 mt-12 md:max-w-md lg:max-w-lg">
           <ProfileForm />
         </div>
       </div>

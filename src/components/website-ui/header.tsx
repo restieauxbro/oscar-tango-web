@@ -22,7 +22,7 @@ const Header = () => {
             alt="Oscar Tango"
             width={90}
             height={90}
-            className="origin-top-left scale-75 bg-white md:bg-white/70 md:scale-100"
+            className="origin-top-left scale-75 bg-white md:scale-100 md:bg-white/70"
           />
         </Link>
         <div></div>

@@ -35,12 +35,12 @@ const WhatWeOffer = () => {
         </motion.div>
       ))}
 
-      <h2 className="top-[calc(100vh-2.6lh)] grid pb-0 pl-4 pt-12 text-5xl font-semibold text-cyan-700 sm:text-7xl md:sticky md:grid-cols-2 md:pb-12 md:text-8xl md:text-cyan-50 lg:text-9xl lg:leading-[0.8]">
+      <h2 className="md:top-[calc(100vh-2.8lh)] lg:top-[calc(100vh-2.6lh)] grid pb-0 px-8 md:px-4 pt-12 text-5xl font-semibold leading-none md:leading-[0.8] text-cyan-700 sm:text-7xl md:sticky md:grid-cols-2 md:pb-12 md:text-8xl md:text-cyan-50 lg:text-9xl lg:leading-[0.8]">
         What <br /> we offer
       </h2>
       <div className="mx-auto grid max-w-screen-2xl gap-12 px-8 md:grid-cols-2">
-        <div></div>
-        <div className="mx-auto max-w-xl">
+        <div className="hidden md:block"></div>
+        <div className="mx-auto max-w-xl lg:pb-[20lvh]">
           {serviceItems.map((item, i) => (
             <OfferingItem
               key={i}
@@ -73,7 +73,7 @@ const OfferingItem = ({
   const { scrollYProgress } = useScroll({
     target: ref,
   });
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
   const inView = useInView(ref, { margin: "0px 300px -250px 0px" });
   useEffect(() => {
@@ -85,7 +85,7 @@ const OfferingItem = ({
   return (
     <motion.div
       className={cn(
-        "grid min-h-[70lvh] snap-start snap-always place-items-center py-12 transition-opacity",
+        "grid snap-start snap-always place-items-center py-12 transition-opacity lg:min-h-[70lvh]",
         title === image ? "opacity-100" : "opacity-50",
       )}
       style={{ scale }}

@@ -42,7 +42,7 @@ const ScrollToEnlarge = () => {
                 {`Oscar Tango`}
               </h2>
             </div>
-            <div className="ml-auto mr-0 mt-20 max-w-2xl">
+            <div className="ml-auto mr-0 mt-8 md:mt-20 max-w-2xl">
               <BlinderAnim
                 text="We're a forward-thinking digital agency, dedicated to developing smart, bespoke AI solutions tailored to your business needs. Our expertise lies in providing insightful guidance and cutting-edge strategies, propelling your business into the new digital era. Partner with us to fully leverage the transformative power of AI."
                 tag="h3"
@@ -51,7 +51,7 @@ const ScrollToEnlarge = () => {
             </div>
           </div>
 
-          <div className="grid w-screen max-w-screen-xl gap-4 px-8 pt-12 md:grid-cols-3 lg:pt-20">
+          <div className="grid w-screen max-w-screen-xl gap-4 px-4 pt-12 md:grid-cols-3 lg:pt-20">
             {[
               {
                 title: "Translating AI",
@@ -61,25 +61,25 @@ const ScrollToEnlarge = () => {
               },
               {
                 title: "Customised AI",
-                image: "/images/microscope.png",
+                image: "/images/customization-in-ai.png",
                 description:
                   "We listen, understand, and identify where AI can make a real difference in your organisation. It's about solutions that fit your specific needs.",
               },
               {
                 title: "Data Readiness",
-                image: "/images/customer-centric.png",
+                image: "/images/data-readiness.png",
                 description:
                   "We help organise your data to make it AI-compatible, ensuring the tools we develop are efficient and tailored to your business context.",
               },
               {
                 title: "User and Brand Safety",
-                image: "/images/ai-strategy.png",
+                image: "/images/safety-helmet.png",
                 description:
                   "We tackle AI safety head-on, assessing risks and setting up safeguards to ensure responsible and secure use of AI for your business and your users.",
               },
               {
                 title: "Exceptional Design",
-                image: "/images/microscope.png",
+                image: "/images/exceptional-design.png",
                 description:
                   "Our designs aren't just about looks; they’re about creating user-friendly AI tools that align with your brand and customer needs.",
               },
