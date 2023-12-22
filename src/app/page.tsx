@@ -14,13 +14,13 @@ export default function Home() {
 
         <ScrollToEnlarge />
         <WhatWeOffer />
-        <div className="grid place-items-center md:py-[clamp(5rem,10vh,10rem)]">
+        <div className="md:grid md:place-items-center md:py-[clamp(5rem,10vh,10rem)]">
           <div className="mx-auto max-w-screen-lg px-8 py-12 sm:px-6  md:py-16 lg:py-[clamp(4rem,20lvh,8rem)]">
             <div className="max-w-2xl">
               <BlinderAnim
                 text="Oscar Tango is based in Nelson, New Zealand and Melbourne, Australia. We’re a fully remote team of passionate and highly experienced digital professionals. We’re excited to apply our skills and knowledge to helping your organisation develop AI solutions."
                 tag="p"
-                className="text-neutral-700 text-2xl md:leading-snug lg:text-3xl lg:leading-snug"
+                className="text-neutral-700 text-2xl leading-normal md:leading-snug lg:text-3xl lg:leading-snug"
               />
             </div>
           </div>

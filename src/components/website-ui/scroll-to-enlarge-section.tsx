@@ -27,7 +27,7 @@ const ScrollToEnlarge = () => {
 
   return (
     <motion.div
-      className="preserve-3d relative -mt-24 mb-0 flex justify-center overflow-hidden rounded-t-[2.5rem] bg-cyan-800"
+      className="preserve-3d relative -mt-24 mb-0 flex justify-center overflow-hidden rounded-t-[2.5rem] bg-gradient-to-br from-cyan-700 to-cyan-900"
       style={{ scale }}
     >
       <div className="absolute left-1/2 top-1 -translate-x-1/2 text-white">
@@ -42,7 +42,7 @@ const ScrollToEnlarge = () => {
                 {`Oscar Tango`}
               </h2>
             </div>
-            <div className="ml-auto mr-0 mt-8 md:mt-20 max-w-2xl">
+            <div className="ml-auto mr-0 mt-8 max-w-2xl md:mt-20">
               <BlinderAnim
                 text="We're a forward-thinking digital agency, dedicated to developing smart, bespoke AI solutions tailored to your business needs. Our expertise lies in providing insightful guidance and cutting-edge strategies, propelling your business into the new digital era. Partner with us to fully leverage the transformative power of AI."
                 tag="h3"
@@ -92,9 +92,9 @@ const ScrollToEnlarge = () => {
             ].map((i) => (
               <div
                 key={i.title}
-                className="grid min-h-[18rem] rounded-lg border border-slate-400 p-8 pt-4 transition-colors hover:border-slate-300 hover:shadow-md"
+                className="grid min-h-[18rem] rounded-lg bg-cyan-500/10 p-8 pt-4"
               >
-                <div className="grid justify-items-center">
+                <div className="relative grid justify-items-center">
                   <Image src={i.image} alt={i.title} width={230} height={230} />
                 </div>
                 <h3 className="mb-4 text-xl font-medium">{i.title}</h3>

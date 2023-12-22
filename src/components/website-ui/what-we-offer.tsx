@@ -31,12 +31,13 @@ const WhatWeOffer = () => {
               placeholder="blur"
               blurDataURL={`/_next/image?url=https://oscartango.digital${imageUrl}&w=16&q=1`}
             />
+            <div className="noise-overlay absolute left-0 top-0 h-full w-full"></div>
           </div>
         </motion.div>
       ))}
 
-      <h2 className="md:top-[calc(100vh-2.8lh)] lg:top-[calc(100vh-2.6lh)] grid pb-0 px-8 md:px-4 pt-12 text-5xl font-semibold leading-none md:leading-[0.8] text-cyan-700 sm:text-7xl md:sticky md:grid-cols-2 md:pb-12 md:text-8xl md:text-cyan-50 lg:text-9xl lg:leading-[0.8]">
-        What <br /> we offer
+      <h2 className="text-balance px-8 pb-0 pt-12 text-5xl font-semibold leading-none text-cyan-700 sm:text-7xl md:sticky md:top-[calc(100vh-2.8lh)] md:grid-cols-2 md:px-4 md:pb-12 md:text-8xl md:leading-[0.8] md:text-cyan-50 lg:top-[calc(100vh-2.6lh)] lg:text-9xl lg:leading-[0.8] max-w-screen-sm">
+        What we offer
       </h2>
       <div className="mx-auto grid max-w-screen-2xl gap-12 px-8 md:grid-cols-2">
         <div className="hidden md:block"></div>
@@ -93,7 +94,7 @@ const OfferingItem = ({
       <div>
         <h3
           className={cn(
-            "mb-4 text-pretty text-3xl transition-colors duration-300 ease-in-out lg:text-4xl",
+            "mb-4 text-balance text-3xl transition-colors duration-300 ease-in-out lg:text-4xl",
             title === image ? "text-cyan-700" : "text-neutral-600",
           )}
           ref={ref}

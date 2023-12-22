@@ -164,7 +164,7 @@ export const contactOTDefnition: OpenAIFunctionDefinition = {
         enum: [1, 2, 3, 4, 5],
       },
     },
-    required: ["email", "rating"],
+    required: ["first_name", "last_name", "client_summary", "email", "rating"],
   },
 };
 
