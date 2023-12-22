@@ -18,7 +18,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isDevBranch = process.env.VERCEL_GIT_REPO_SLUG === "dev";
+  const isDevBranch = process.env.VERCEL_ENV === "dev";
   return (
     <html lang="en">
       <body className={`${urbanist.className} snap-y snap-mandatory`}>
@@ -26,13 +26,13 @@ export default function RootLayout({
         {isDevBranch ? (
           <AuthWall client="oscar-tango">
             <Header />
-            {process.env.VERCEL_GIT_REPO_SLUG}
+            {process.env.VERCEL_ENV}
             {children}
           </AuthWall>
         ) : (
           <>
             <Header />
-            {process.env.VERCEL_GIT_REPO_SLUG}
+            {process.env.VERCEL_ENV}
 
             {children}
           </>
