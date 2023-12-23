@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/website-ui/header";
 import GTag from "@/components/gtag";
 import AuthWall from "@/components/auth/auth-wall";
+import { isDev } from "@/lib/utils";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -18,22 +19,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isDevBranch = process.env.VERCEL_ENV === "dev";
+  const dev = isDev();
   return (
     <html lang="en">
       <body className={`${urbanist.className} snap-y snap-mandatory`}>
         <GTag />
-        {isDevBranch ? (
+        {dev ? (
           <AuthWall client="oscar-tango">
             <Header />
-            {process.env.VERCEL_ENV}
             {children}
           </AuthWall>
         ) : (
           <>
             <Header />
-            {process.env.VERCEL_ENV}
-
             {children}
           </>
         )}
