@@ -98,7 +98,7 @@ const ScrollToEnlarge = () => {
                   <Image src={i.image} alt={i.title} width={230} height={230} />
                 </div>
                 <h3 className="mb-4 text-xl font-medium">{i.title}</h3>
-                <p>{i.description}</p>
+                <p className="opacity-80">{i.description}</p>
               </div>
             ))}
           </div>

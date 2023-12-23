@@ -11,6 +11,25 @@ const WhatWeOffer = () => {
   );
   return (
     <div className="relative min-h-screen">
+      <div
+        className={cn(
+          "absolute left-0 top-0 hidden h-full w-[calc(50%-1.5rem)] bg-purple-500 md:block",
+        )}
+      >
+        <div className="sticky top-0 h-lvh w-full">
+          <Image
+            src={
+              "/_next/image?url=https://oscartango.digital/images/knowledge-base.png&w=32&q=2"
+            }
+            priority
+            layout="fill"
+            alt={"place-holder"}
+            className="h-screen w-full object-cover"
+          />
+          <div className="noise-overlay absolute left-0 top-0 hidden h-full w-full"></div>
+          <div className="noise-overlay absolute left-0 top-0 h-full w-full"></div>
+        </div>
+      </div>
       {imageItems.map(({ title, imageUrl }, i) => (
         <motion.div
           className={cn(
@@ -31,12 +50,11 @@ const WhatWeOffer = () => {
               placeholder="blur"
               blurDataURL={`/_next/image?url=https://oscartango.digital${imageUrl}&w=16&q=1`}
             />
-            <div className="noise-overlay absolute left-0 top-0 h-full w-full"></div>
           </div>
         </motion.div>
       ))}
 
-      <h2 className="text-balance px-8 pb-0 pt-12 text-5xl font-semibold leading-none text-cyan-700 sm:text-7xl md:sticky md:top-[calc(100vh-2.8lh)] md:grid-cols-2 md:px-4 md:pb-12 md:text-8xl md:leading-[0.8] md:text-cyan-50 lg:top-[calc(100vh-2.6lh)] lg:text-9xl lg:leading-[0.8] max-w-screen-sm">
+      <h2 className="max-w-screen-sm text-balance px-8 pb-0 pt-12 text-5xl font-semibold leading-none text-cyan-700 sm:text-7xl md:sticky md:top-[calc(100vh-2.8lh)] md:grid-cols-2 md:px-4 md:pb-12 md:text-8xl md:leading-[0.8] md:text-cyan-50 lg:top-[calc(100vh-2.6lh)] lg:text-9xl lg:leading-[0.8]">
         What we offer
       </h2>
       <div className="mx-auto grid max-w-screen-2xl gap-12 px-8 md:grid-cols-2">

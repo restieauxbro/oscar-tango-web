@@ -54,12 +54,13 @@ const HeroChat = () => {
                   alt="big ideas"
                   priority
                   blurDataURL={`/_next/image?url=${"oscartango.digital/images/isometric-phone-1.png"}&w=16&q=1`}
+                  className="relative"
                 />
               </motion.div>
             )}
           </AnimatePresence>
           <AnimateFromHidden show={true} animateOnMount={false}>
-            <div className="mb-12 max-w-xl lg:mb-16 lg:max-w-3xl">
+            <div className="relative mb-12 max-w-xl lg:mb-16 lg:max-w-3xl">
               <h1
                 className={cn(
                   headingStyles,

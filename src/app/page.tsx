@@ -20,7 +20,7 @@ export default function Home() {
               <BlinderAnim
                 text="Oscar Tango is based in Nelson, New Zealand and Melbourne, Australia. We’re a fully remote team of passionate and highly experienced digital professionals. We’re excited to apply our skills and knowledge to helping your organisation develop AI solutions."
                 tag="p"
-                className="text-neutral-700 text-2xl leading-normal md:leading-snug lg:text-3xl lg:leading-snug"
+                className="text-2xl leading-normal text-neutral-700 md:leading-snug lg:text-3xl lg:leading-snug"
               />
             </div>
           </div>

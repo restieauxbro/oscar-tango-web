@@ -517,7 +517,7 @@ const OptionsButtons = ({
           }}
         >
           <div>
-            <h2 className="mb-2 font-semibold">{suggestion.title}</h2>
+            <h2 className="mb-2 font-semibold text-neutral-700">{suggestion.title}</h2>
             <p className="text-sm font-normal opacity-70">{suggestion.description}</p>
           </div>
         </Button>

@@ -33,6 +33,8 @@
     --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
+
+    --noise-circle-color: rgb(34, 6, 84);
   }
 
   .dark {
@@ -84,13 +86,16 @@
   visibility: hidden;
 }
 
-/* .noise-circle {
-  width: 95%;
-  height: 140px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at 70%, navy, rgba(0, 0, 0, 0)), url(https://grainy-gradients.vercel.app/noise.svg);
+.noise-neutral-800 {
+  --noise-circle-color: rgb(28, 26, 30);
+}
+
+.noise-circle {
+  border-radius: 100%;
+  background: radial-gradient(ellipse at 50%, var(--noise-circle-color) 0%, rgba(0, 0, 0, 0)) 2%, url(https://grainy-gradients.vercel.app/noise.svg);
   filter: contrast(150%) brightness(700%);
-} */
+}
+
 
 .noise-overlay {
   background: url(/images/noise.svg);
@@ -101,3 +106,4 @@
   opacity: 0.8;
   mix-blend-mode: overlay;
 }
+
