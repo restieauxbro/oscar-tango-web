@@ -6,8 +6,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const isDev = () => {
-  const VERCEL_URL = process.env.VERCEL_URL;
-  const VERCEL_BRANCH_URL = process.env.VERCEL_BRANCH_URL;
-  if (VERCEL_URL === "") return true;
-  return VERCEL_BRANCH_URL?.includes("dev");
+  const VERCEL_ENV = process.env.VERCEL_ENV;
+  return VERCEL_ENV === "development" || VERCEL_ENV === "preview";
 };
