@@ -24,18 +24,29 @@ const ParalaxSection = () => {
         className="h-[calc(100% + 180px)] preserve-3d absolute inset-0 -top-[180px] w-[120%] bg-purple-800"
         style={{ y }}
       >
-        <Image
-          src="/images/vackground-com-agUC-v_D1iI-unsplash.jpg"
-          alt="texture"
-          width={1920}
-          height={1080}
-          quality={100}
-          className="h-full w-full scale-x-[-1] object-cover opacity-80"
-          style={{ objectFit: "cover" }}
-          loading="eager"
-          placeholder="blur"
-          blurDataURL={`/_next/image?url=https://oscartango.digital/images/vackground-com-agUC-v_D1iI-unsplash.jpg&w=16&q=2`}
-        />
+        <div className="absolute top-0 h-full w-full">
+          <Image
+            src={`/_next/image?url=https://oscartango.digital/images/vackground-com-agUC-v_D1iI-unsplash.jpg&w=32&q=1`}
+            priority
+            fill
+            alt={"place-holder"}
+            className="h-full w-full scale-x-[-1] object-cover opacity-80"
+          />
+        </div>
+        <div className="absolute left-0 top-0 h-full w-full">
+          <Image
+            src="/images/vackground-com-agUC-v_D1iI-unsplash.jpg"
+            alt="texture"
+            width={1920}
+            height={1080}
+            quality={100}
+            className="h-full w-full scale-x-[-1] object-cover opacity-80"
+            style={{ objectFit: "cover" }}
+            loading="eager"
+            placeholder="blur"
+            blurDataURL={`/_next/image?url=https://oscartango.digital/images/vackground-com-agUC-v_D1iI-unsplash.jpg&w=16&q=2`}
+          />
+        </div>
         <div className="noise-overlay absolute left-0 top-0 h-full w-full"></div>
       </motion.div>
       <div className="relative mx-auto w-screen max-w-screen-lg px-8 py-20 text-white lg:py-28">

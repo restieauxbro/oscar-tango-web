@@ -23,6 +23,7 @@ const Header = () => {
             width={90}
             height={90}
             className="origin-top-left scale-75 bg-white md:scale-100 md:bg-white/70"
+            priority
           />
         </Link>
         <div></div>

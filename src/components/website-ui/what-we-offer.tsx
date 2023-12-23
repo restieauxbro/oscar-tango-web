@@ -11,25 +11,6 @@ const WhatWeOffer = () => {
   );
   return (
     <div className="relative min-h-screen">
-      <div
-        className={cn(
-          "absolute left-0 top-0 hidden h-full w-[calc(50%-1.5rem)] bg-purple-500 md:block",
-        )}
-      >
-        <div className="sticky top-0 h-lvh w-full">
-          <Image
-            src={
-              "/_next/image?url=https://oscartango.digital/images/knowledge-base.png&w=32&q=2"
-            }
-            priority
-            layout="fill"
-            alt={"place-holder"}
-            className="h-screen w-full object-cover"
-          />
-          <div className="noise-overlay absolute left-0 top-0 hidden h-full w-full"></div>
-          <div className="noise-overlay absolute left-0 top-0 h-full w-full"></div>
-        </div>
-      </div>
       {imageItems.map(({ title, imageUrl }, i) => (
         <motion.div
           className={cn(
@@ -41,15 +22,27 @@ const WhatWeOffer = () => {
           key={i}
         >
           <div className="sticky top-0 h-lvh w-full">
-            <Image
-              src={imageUrl}
-              priority={i === 0}
-              layout="fill"
-              alt={title}
-              className="h-screen w-full object-cover"
-              placeholder="blur"
-              blurDataURL={`/_next/image?url=https://oscartango.digital${imageUrl}&w=16&q=1`}
-            />
+            <div className="absolute top-0 h-full w-full">
+              <Image
+                src={`/_next/image?url=https://oscartango.digital${imageUrl}&w=32&q=1`}
+                priority={i === 0}
+                fill
+                alt={title}
+                className="h-screen w-full object-cover"
+              />
+            </div>
+            <div className="absolute top-0 h-full w-full">
+              <Image
+                src={imageUrl}
+                priority={i === 0}
+                fill
+                alt={title}
+                className="h-screen w-full object-cover"
+                placeholder="blur"
+                blurDataURL={`/_next/image?url=https://oscartango.digital${imageUrl}&w=16&q=1`}
+              />
+            </div>
+            <div className="noise-overlay absolute left-0 top-0 h-full w-full"></div>
           </div>
         </motion.div>
       ))}
