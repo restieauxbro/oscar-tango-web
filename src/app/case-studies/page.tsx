@@ -36,7 +36,7 @@ const CaseStudiesPage = async () => {
         <br />
         <br />
         <Suspense fallback={<div>Loading...</div>}>
-          <pre>{JSON.stringify(pages[1], null, 2)}</pre>
+          <pre>{JSON.stringify(pages, null, 2)}</pre>
         </Suspense>
       </div>
     </div>

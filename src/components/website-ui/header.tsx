@@ -11,12 +11,14 @@ import Image from "next/image";
 
 const Header = () => {
   return (
-    <header className="fixed z-10 w-full px-4 py-4">
+    <header
+      className={cn(
+        "fixed z-10 w-full px-4 py-4",
+        false && "bg-slate-50/30 backdrop-blur-md backdrop-saturate-[180%]",
+      )}
+    >
       <div className="flex justify-between">
-        <Link href={"/"} className="font-medium">
-          {/* <div className="h-16 w-16 origin-top-left bg-cyan-600 p-2 text-sm leading-3 text-white">
-            Oscar <br /> Tango
-          </div> */}
+        <Link href={"/"} className="absolute left-4 top-4 font-medium">
           <Image
             src="/images/oscartango_logo.svg"
             alt="Oscar Tango"
@@ -27,6 +29,20 @@ const Header = () => {
           />
         </Link>
         <div></div>
+        <Nav />
+        {/* <div>
+          <ul className="flex items-center gap-6 text-sm">
+            <li>
+              <Link href="/case-studies">Case Studies</Link>
+            </li>
+            <li>
+              <Link href="/about">About</Link>
+            </li>
+            <li>
+              <Link href="/contact">Contact</Link>
+            </li>
+          </ul>
+        </div> */}
       </div>
     </header>
   );
