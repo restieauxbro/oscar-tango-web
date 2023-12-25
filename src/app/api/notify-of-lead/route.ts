@@ -33,6 +33,7 @@ export async function POST(request: Request) {
 
     if (error) {
       console.log("error adding to supabase", error);
+      throw new Error(error.message);
     }
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
@@ -63,13 +64,22 @@ export async function POST(request: Request) {
         ${client_summary ? `<p>Client summary: ${client_summary}</p>` : ""}
         `,
     };
-    sgMail.send(msg).then(() => {
-      console.log("Email sent");
+    await sgMail.send(msg).catch((error) => {
+      console.log("\n\n", { error }, "\n\n");
+
+      // Check if error.message exists and is a string
+      const errorMessage =
+        error && typeof error.message === "string"
+          ? error.message
+          : "An unknown error occurred";
+      throw new Error(errorMessage);
     });
 
     return Response.json("email sent");
   } catch (error) {
-    if (error instanceof Error)
+    if (error instanceof Error) {
+      console.log("error", error.message);
       return new Response(error.message, { status: 500 });
+    }
   }
 }

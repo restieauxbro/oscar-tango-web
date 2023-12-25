@@ -77,6 +77,7 @@ const ChatUI = ({ inputPlaceholder }: { inputPlaceholder?: string }) => {
                               "Ask us how we personalize AI solutions for your unique needs.",
                             value:
                               "How can you customize AI to my business needs?",
+                            response: `Of course, Oscar Tango can help with that. The process of customizing AI to your business needs involves understanding your objectives, identifying tasks that can be automated, data analysis and developing a tailored AI solution. This can streamline operations, boost efficiency, and enhance the customer experience in your business.\n\nTo serve you better, could you please tell me more about your business field and what challenge you're looking to solve?`,
                           },
                           {
                             title: "Enhancing Customer Engagement",
@@ -482,12 +483,7 @@ const OptionsButtons = ({
   suggestions,
   setChatHistory,
 }: {
-  suggestions?: {
-    title: string;
-    description: string;
-    value?: string;
-    incomplete?: boolean;
-  }[];
+  suggestions?: ChatSuggestion[];
   setChatHistory: Dispatch<SetStateAction<ClientChatMessage[]>>;
 }) => {
   return (
@@ -517,11 +513,23 @@ const OptionsButtons = ({
           }}
         >
           <div>
-            <h2 className="mb-2 font-semibold text-neutral-700">{suggestion.title}</h2>
-            <p className="text-sm font-normal opacity-70">{suggestion.description}</p>
+            <h2 className="mb-2 font-semibold text-neutral-700">
+              {suggestion.title}
+            </h2>
+            <p className="text-sm font-normal opacity-70">
+              {suggestion.description}
+            </p>
           </div>
         </Button>
       ))}
     </div>
   );
+};
+
+type ChatSuggestion = {
+  title: string;
+  description: string;
+  value?: string;
+  incomplete?: boolean;
+  response?: string;
 };

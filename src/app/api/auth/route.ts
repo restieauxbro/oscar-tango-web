@@ -11,6 +11,7 @@ export async function POST(request: Request) {
 
   const cookie = serialize(`${client}-logged-in`, "true", {
     httpOnly: true,
+    secure: true,
     path: "/",
     expires: expiryDate, // Set the expiry date
   });

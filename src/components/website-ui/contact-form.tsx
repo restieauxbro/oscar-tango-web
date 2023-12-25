@@ -23,6 +23,7 @@ import Balancer from "react-wrap-balancer";
 import Script from "next/script";
 import { handleRecaptcha } from "@/lib/recaptcha";
 import { FormDetailsForAPI } from "@/app/api/notify-of-lead/route";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   first_name: z.string().min(1, {
@@ -68,7 +69,7 @@ export function ProfileForm() {
       if (!captchaPassed) throw new Error("Captcha failed");
 
       if (captchaPassed) {
-        const body: FormDetailsForAPI = {...values, created_at: new Date()}
+        const body: FormDetailsForAPI = { ...values, created_at: new Date() };
         // post to /api/notify-of-lead
         const res = await fetch("/api/notify-of-lead", {
           method: "POST",
@@ -77,22 +78,27 @@ export function ProfileForm() {
           },
           body: JSON.stringify(body),
         });
-        console.log(res);
         if (res.ok) {
           setFormState("success");
         }
-      } else {
-        throw new Error("Captcha failed");
+        if (!res.ok) {
+          // Parse the error message from the API
+          const errorResponse = await res.text();
+          console.error("API Error:", errorResponse);
+          setFormState("error");
+          toast.error(errorResponse);
+          return;
+        }
       }
     } catch (err) {
-      console.log(err);
-      setFormState("error");
+      if (err instanceof Error) {
+        console.error(err.message);
+        setFormState("error");
+      }
     }
   }
 
-  const disabled = ["submitting", "success", "error"].includes(
-    formState,
-  ) as boolean;
+  const disabled = ["submitting", "success"].includes(formState) as boolean;
 
   return (
     <>

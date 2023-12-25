@@ -6,6 +6,8 @@ import Header from "@/components/website-ui/header";
 import GTag from "@/components/gtag";
 import AuthWall from "@/components/auth/auth-wall";
 import { isDev } from "@/lib/utils";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "@/components/ui/sonner";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -35,6 +37,8 @@ export default function RootLayout({
             {children}
           </>
         )}
+        <Toaster />
+        <SpeedInsights />
         <Analytics />
       </body>
     </html>
