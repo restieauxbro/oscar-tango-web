@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
     if (error) {
       console.log("error adding to supabase", error);
-      throw new Error(error.message);
+      console.log(error.message);
     }
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
