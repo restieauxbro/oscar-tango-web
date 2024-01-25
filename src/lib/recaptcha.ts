@@ -5,7 +5,7 @@ export const handleRecaptcha = async () => {
   const token = await grecaptcha.enterprise?.execute(
     "6LcYsCUpAAAAAL2k6jL8Mn2AutiUC9U8igN2ivtz",
     {
-      action: 'LOGIN',
+      action: "LOGIN",
     },
   );
   // Send the the token to our server for verification
@@ -14,13 +14,13 @@ export const handleRecaptcha = async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ token, action: 'LOGIN' }),
+    body: JSON.stringify({ token, action: "LOGIN" }),
   };
   let res = await fetch("/api/recaptcha", options);
   const resJson = await res.json();
   console.log(resJson);
   const score = await resJson?.score;
-  if (score > 0.6) {
+  if (score > 0.2) {
     return true;
   } else {
     return false;

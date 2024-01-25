@@ -1,12 +1,13 @@
 import React, { Suspense } from "react";
 import { Client } from "@notionhq/client";
+import { headingStyles } from "@/components/ui/typography";
 
 // Initializing a client
 const notion = new Client({
   auth: process.env.NOTION_API_KEY,
 });
 
-const CaseStudiesPage = async () => {
+const BlogListPage = async () => {
   const OTDatabase = await notion.databases.query({
     database_id: "349dce2f4de34907add3f5a750c78cb1",
     // filter_properties: ["title", "SjWT"],
@@ -16,36 +17,33 @@ const CaseStudiesPage = async () => {
     return {
       id: page.id,
       //@ts-ignore
-      properties: page.properties as CaseStudyProperties,
+      properties: page.properties as BlogArticle,
     };
   });
 
   return (
     <div className="grid min-h-screen place-items-center">
       <div className="grid gap-8">
-        <h1>Case Studies</h1>
-        {/* <ul>
-          {pages.map(({ id, properties }) => (
-            <li key={id}>
-              {JSON.stringify(properties, null, 2)}
-              <a href={`/case-studies/${id}`}>{id}</a>
-            </li>
-          ))}
-        </ul> */}
-        <br />
-        <br />
-        <br />
-        <Suspense fallback={<div>Loading...</div>}>
-          <pre>{JSON.stringify(pages, null, 2)}</pre>
-        </Suspense>
+        <h1 className={headingStyles}>Blog</h1>
+        <ul className="grid gap-8">
+          {pages.map(({ id, properties }) => {
+            const slug = properties.slug?.rich_text[0]?.text.content;
+            if (!slug) return null;
+            return (
+              <li key={id}>
+                <a href={`/blog/${slug}`}>{properties.Name.title[0].plain_text}</a>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
 };
 
-export default CaseStudiesPage;
+export default BlogListPage;
 
-type CaseStudyProperties = {
+export type BlogArticle = {
   Tags: {
     id: "SjWT";
     type: "multi_select";
@@ -57,7 +55,7 @@ type CaseStudyProperties = {
       },
     ];
   };
-  slug: {
+  slug?: {
     id: "%5Emh%7C";
     type: "rich_text";
     rich_text: [
@@ -96,5 +94,40 @@ type CaseStudyProperties = {
         href: null;
       },
     ];
+  };
+  "AI summary": {
+    id: "Iz%7B%3F";
+    type: "rich_text";
+    rich_text: [
+      {
+        type: "text";
+        text: {
+          content: string;
+          link: null;
+        };
+        annotations: {
+          bold: false;
+          italic: false;
+          strikethrough: false;
+          underline: false;
+          code: false;
+          color: "default";
+        };
+        plain_text: string;
+        href: null;
+      },
+    ];
+  };
+  "Created by": {
+    id: "%40aQp";
+    type: "created_by";
+    created_by: {
+      object: "user";
+      id: string;
+      name: string;
+      avatar_url: null;
+      type: "person";
+      person: {};
+    };
   };
 };
