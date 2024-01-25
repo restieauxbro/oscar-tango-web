@@ -2,6 +2,9 @@ import React, { Suspense } from "react";
 import { Client } from "@notionhq/client";
 import { headingStyles } from "@/components/ui/typography";
 
+// Opt out of caching for all data requests in the route segment
+export const dynamic = "force-dynamic";
+
 // Initializing a client
 const notion = new Client({
   auth: process.env.NOTION_API_KEY,
@@ -31,7 +34,9 @@ const BlogListPage = async () => {
             if (!slug) return null;
             return (
               <li key={id}>
-                <a href={`/blog/${slug}`}>{properties.Name.title[0].plain_text}</a>
+                <a href={`/blog/${slug}`}>
+                  {properties.Name.title[0].plain_text}
+                </a>
               </li>
             );
           })}

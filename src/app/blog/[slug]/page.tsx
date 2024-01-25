@@ -5,6 +5,9 @@ import { convertToHtml } from "@/lib/notion";
 import { headingStyles } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
+// Opt out of caching for all data requests in the route segment
+export const dynamic = 'force-dynamic'
+
 // Initializing a client
 const notion = new Client({
   auth: process.env.NOTION_API_KEY,
