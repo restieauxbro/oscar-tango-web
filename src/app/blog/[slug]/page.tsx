@@ -6,7 +6,7 @@ import { headingStyles } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
 // Opt out of caching for all data requests in the route segment
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 // Initializing a client
 const notion = new Client({
@@ -54,8 +54,14 @@ const BlogPage = async ({
     const childrenHtml = convertToHtml(pageChildren);
 
     return (
-      <div className="prose prose-neutral mx-auto px-8 py-36">
-        <h1 className={cn(headingStyles, "text-balance mb-8 text-neutral-800")}>
+      <div className="prose prose-neutral prose-headings:text-balance mx-auto max-w-[700px] px-8 py-36">
+        <h1
+          className={cn(headingStyles, "text-balance mb-8 text-neutral-800")}
+          style={
+            // @ts-ignore
+            { textWrap: "balance" }
+          }
+        >
           {Name.title[0].plain_text}
         </h1>
         <div
