@@ -30,19 +30,6 @@ const Header = () => {
         </Link>
         <div></div>
         <Nav />
-        {/* <div>
-          <ul className="flex items-center gap-6 text-sm">
-            <li>
-              <Link href="/case-studies">Case Studies</Link>
-            </li>
-            <li>
-              <Link href="/about">About</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact</Link>
-            </li>
-          </ul>
-        </div> */}
       </div>
     </header>
   );
@@ -63,7 +50,7 @@ const Nav = () => {
       <nav className="relative rounded-full bg-slate-800 px-4 py-2 pl-6 text-white shadow-md">
         <ul className="flex items-center gap-6 text-sm">
           <li>
-            <Link href="/case-studies">Case Studies</Link>
+            <Link href="/blog">Blog</Link>
           </li>
           <li>
             <Link href="/about">About</Link>

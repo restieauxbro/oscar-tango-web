@@ -51,7 +51,7 @@ const BlogPage = async ({
     const childrenHtml = convertToHtml(pageChildren);
 
     return (
-      <div className="prose prose-neutral mx-auto px-8 py-32">
+      <div className="prose prose-neutral mx-auto px-8 py-36">
         <h1 className={cn(headingStyles, "text-balance mb-8 text-neutral-800")}>
           {Name.title[0].plain_text}
         </h1>
