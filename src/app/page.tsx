@@ -18,7 +18,7 @@ export default function Home() {
           <div className="mx-auto max-w-screen-lg px-8 py-12 sm:px-6  md:py-16 lg:py-[clamp(4rem,20lvh,8rem)]">
             <div className="max-w-2xl">
               <BlinderAnim
-                text="Oscar Tango is based in Nelson, New Zealand and Melbourne, Australia. We’re a fully remote team of passionate and highly experienced digital professionals. We’re excited to apply our skills and knowledge to helping your organisation develop AI solutions."
+                text="Oscar Tango is based in Nelson, New Zealand and Melbourne, Australia. We’re a fully remote team of passionate and highly experienced digital professionals with experience in AI, software development and customer success. We’re here to help you build the future of work."
                 tag="p"
                 className="text-2xl leading-normal text-neutral-700 md:leading-snug lg:text-3xl lg:leading-snug"
               />

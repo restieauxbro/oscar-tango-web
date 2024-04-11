@@ -24,7 +24,7 @@ export default function RootLayout({
   const dev = isDev();
   return (
     <html lang="en">
-      <body className={`${urbanist.className} snap-y snap-mandatory`}>
+      <body className={`${urbanist.className} overflow-x-hidden`}>
         <GTag />
         {dev ? (
           <AuthWall client="oscar-tango">

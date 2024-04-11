@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { headingStyles } from "@/components/ui/typography";
 import AnimateFromHidden from "../animations/AnimateFromHidden";
@@ -34,6 +34,7 @@ const HeroChat = () => {
   const blurMotion = useTransform(scrollY, [200, 1000], [0, 10]);
   const blur = useSpring(blurMotion, springEase);
   const blurMotionTemplate = useMotionTemplate`blur(${blur}px)`;
+  const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <>
       <motion.div
@@ -45,6 +46,8 @@ const HeroChat = () => {
             {true && (
               <motion.div
                 className="pointer-events-none absolute -right-52 -top-24 hidden md:block lg:right-[-20rem]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: imageLoaded ? 1 : 0 }}
                 exit={{ opacity: 0, transition: { duration: 0.8 } }}
               >
                 <Image
@@ -53,6 +56,8 @@ const HeroChat = () => {
                   height={850}
                   alt="big ideas"
                   priority
+                  onLoad={() => setImageLoaded(true)}
+                  //    placeholder="blur"
                   blurDataURL={`/_next/image?url=${"oscartango.digital/images/isometric-phone-1.png"}&w=16&q=1`}
                   className="relative"
                 />
